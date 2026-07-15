@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gemini 18 Months — Activation Store</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Cairo:wght@400;600;700;800&display=swap"
+        rel="stylesheet" />
+    <style>
+        :root {
+            --bg: #060b14;
+            --surface: #0d1626;
+            --surface2: #121e33;
+            --border: rgba(99, 179, 237, 0.12);
+            --accent: #4f8ef7;
+            --accent2: #8b5cf6;
+            --gem: #1de9b6;
+            --text: #e8f0fe;
+            --muted: #7a90b0;
+            --success: #22c55e;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --radius: 16px;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Cairo', 'Inter', sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Animated background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background:
+                radial-gradient(ellipse at 20% 20%, rgba(79, 142, 247, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(139, 92, 246, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(29, 233, 182, 0.04) 0%, transparent 60%);
+            animation: bgPulse 8s ease-in-out infinite alternate;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes bgPulse {
+            0% {
+                transform: scale(1) rotate(0deg);
+            }
+
+            100% {
+                transform: scale(1.05) rotate(2deg);
+            }
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 32px 20px 60px;
+        }
+
+        /* ─── Header ─── */
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .logo-ring {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent), var(--accent2), var(--gem));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 36px;
+            box-shadow: 0 0 40px rgba(79, 142, 247, 0.4), 0 0 80px rgba(139, 92, 246, 0.2);
+            animation: logoGlow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes logoGlow {
+            0% {
+                box-shadow: 0 0 30px rgba(79, 142, 247, 0.4), 0 0 60px rgba(139, 92, 246, 0.2);
+            }
+
+            100% {
+                box-shadow: 0 0 50px rgba(79, 142, 247, 0.6), 0 0 100px rgba(29, 233, 182, 0.3);
+            }
+        }
+
+        .header h1 {
+            font-size: 28px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff 0%, var(--gem) 50%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        /* ─── Card ─── */
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 28px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow);
+            transition: border-color 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent), var(--accent2), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        .card:hover {
+            border-color: rgba(99, 179, 237, 0.25);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(79, 142, 247, 0.1);
+        }
+
+        .card-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-title .icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        /* ─── Balance Section ─── */
+        .balance-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .stat-box {
+            background: var(--surface2);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+        }
+
+        .stat-box .val {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--gem);
+            margin-bottom: 4px;
+        }
+
+        .stat-box .lbl {
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        /* ─── Product Card ─── */
+        .product-banner {
+            background: linear-gradient(135deg, rgba(79, 142, 247, 0.15), rgba(139, 92, 246, 0.15));
+            border: 1px solid rgba(79, 142, 247, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .product-icon {
+            font-size: 40px;
+            flex-shrink: 0;
+        }
+
+        .product-info h3 {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 6px;
+        }
+
+        .product-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .badge-price {
+            background: rgba(34, 197, 94, 0.15);
+            color: var(--success);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+        }
+
+        .badge-stock {
+            background: rgba(245, 158, 11, 0.15);
+            color: var(--warning);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+
+        .badge-auto {
+            background: rgba(79, 142, 247, 0.15);
+            color: var(--accent);
+            border: 1px solid rgba(79, 142, 247, 0.3);
+        }
+
+        /* ─── Qty Selector ─── */
+        .qty-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .qty-label {
+            font-size: 14px;
+            color: var(--muted);
+            white-space: nowrap;
+        }
+
+        .qty-control {
+            display: flex;
+            align-items: center;
+            background: var(--surface2);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .qty-btn {
+            width: 40px;
+            height: 40px;
+            background: transparent;
+            border: none;
+            color: var(--text);
+            font-size: 20px;
+            cursor: pointer;
+            transition: background 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .qty-btn:hover {
+            background: rgba(79, 142, 247, 0.15);
+        }
+
+        .qty-btn:active {
+            background: rgba(79, 142, 247, 0.3);
+        }
+
+        #qtyInput {
+            width: 60px;
+            text-align: center;
+            background: transparent;
+            border: none;
+            color: var(--text);
+            font-size: 18px;
+            font-weight: 700;
+            font-family: inherit;
+            outline: none;
+            -moz-appearance: textfield;
+        }
+
+        #qtyInput::-webkit-outer-spin-button,
+        #qtyInput::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+        }
+
+        /* ─── Buttons ─── */
+        .btn {
+            width: 100%;
+            padding: 14px 24px;
+            border: none;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 700;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.25s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: white;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .btn:active::after {
+            opacity: 0.08;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            color: white;
+            box-shadow: 0 4px 20px rgba(79, 142, 247, 0.35);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(79, 142, 247, 0.5);
+        }
+
+        .btn-secondary {
+            background: var(--surface2);
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            background: rgba(79, 142, 247, 0.1);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        /* ─── Spinner ─── */
+        .spinner {
+            width: 18px;
+            height: 18px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 0.7s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* ─── Result Box ─── */
+        #resultBox {
+            display: none;
+            margin-top: 20px;
+            animation: fadeInUp 0.4s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(16px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .result-success {
+            background: rgba(34, 197, 94, 0.08);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .result-error {
+            background: rgba(239, 68, 68, 0.08);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .result-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 16px;
+            font-weight: 700;
+            font-size: 15px;
+        }
+
+        .result-success .result-header {
+            color: var(--success);
+        }
+
+        .result-error .result-header {
+            color: var(--danger);
+        }
+
+        .link-item {
+            background: var(--surface2);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 12px 14px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .link-text {
+            flex: 1;
+            font-size: 13px;
+            color: var(--accent);
+            word-break: break-all;
+            font-family: monospace;
+            direction: ltr;
+            text-align: left;
+        }
+
+        .copy-btn {
+            background: rgba(79, 142, 247, 0.15);
+            border: 1px solid rgba(79, 142, 247, 0.3);
+            color: var(--accent);
+            border-radius: 8px;
+            padding: 6px 12px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+            font-family: inherit;
+        }
+
+        .copy-btn:hover {
+            background: rgba(79, 142, 247, 0.3);
+        }
+
+        .copy-btn.copied {
+            background: rgba(34, 197, 94, 0.2);
+            border-color: rgba(34, 197, 94, 0.4);
+            color: var(--success);
+        }
+
+        /* ─── Balance info box ─── */
+        #balanceResult {
+            display: none;
+            margin-top: 16px;
+            animation: fadeInUp 0.4s ease;
+        }
+
+        .user-info {
+            background: var(--surface2);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 16px;
+        }
+
+        .user-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 14px;
+        }
+
+        .user-row:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .user-row:first-child {
+            padding-top: 0;
+        }
+
+        .user-row .key {
+            color: var(--muted);
+        }
+
+        .user-row .val {
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .user-row .val.big {
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--gem);
+        }
+
+        /* ─── Footer ─── */
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            color: var(--muted);
+            font-size: 12px;
+            opacity: 0.6;
+        }
+
+        /* ─── Divider ─── */
+        .divider {
+            height: 1px;
+            background: var(--border);
+            margin: 20px 0;
+        }
+
+        /* ─── Toast ─── */
+        #toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(80px);
+            background: var(--surface2);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 12px 24px;
+            font-size: 14px;
+            font-weight: 600;
+            box-shadow: var(--shadow);
+            transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+            z-index: 999;
+            white-space: nowrap;
+        }
+
+        #toast.show {
+            transform: translateX(-50%) translateY(0);
+        }
+
+        #toast.success {
+            color: var(--success);
+            border-color: rgba(34, 197, 94, 0.3);
+        }
+
+        #toast.error {
+            color: var(--danger);
+            border-color: rgba(239, 68, 68, 0.3);
+        }
+
+        /* ─── Responsive ─── */
+        @media (max-width: 480px) {
+            .balance-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header h1 {
+                font-size: 22px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="toast"></div>
+
+    <div class="container">
+
+        <!-- Header -->
+        <div class="header">
+            <div class="logo-ring">✦</div>
+            <h1>اشتراك Gemini Pro من اعداد حازم محمود</h1>
+            <p>احصل على Gemini Pro 18 شهر — فوري وآمن</p>
+        </div>
+
+        <!-- Balance Card -->
+        <div class="card">
+            <div class="card-title">
+                <div class="icon">💰</div>
+                معلومات الحساب والرصيد
+            </div>
+
+            <button class="btn btn-secondary" id="balanceBtn" onclick="fetchBalance()">
+                <span>🔄</span> عرض الرصيد والحساب
+            </button>
+
+            <div id="balanceResult">
+                <div class="divider"></div>
+                <div class="user-info" id="userInfo"></div>
+            </div>
+        </div>
+
+        <!-- Purchase Card -->
+        <div class="card">
+            <div class="card-title">
+                <div class="icon">✦</div>
+                شراء Gemini Pro — 18 شهر
+            </div>
+
+            <!-- Product Banner -->
+            <div class="product-banner">
+                <div class="product-icon">🤖</div>
+                <div class="product-info">
+                    <h3>Gemini Pro 18 months Activation Link</h3>
+                    <div class="product-meta">
+                        <span class="badge badge-price" id="priceTag">جاري التحميل...</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quantity -->
+            <div class="qty-row">
+                <span class="qty-label">الكمية:</span>
+                <div class="qty-control">
+                    <button class="qty-btn" onclick="changeQty(-1)">−</button>
+                    <input type="number" id="qtyInput" value="1" min="1" max="50" />
+                    <button class="qty-btn" onclick="changeQty(1)">+</button>
+                </div>
+                <span class="qty-label" id="totalCostLabel"
+                    style="color:var(--gem); font-weight:700; font-size:16px;"></span>
+            </div>
+
+            <!-- Buy Button -->
+            <button class="btn btn-primary" id="buyBtn" onclick="purchaseProduct()">
+                <span>🛒</span> اشتري الآن
+            </button>
+
+            <!-- Result -->
+            <div id="resultBox"></div>
+        </div>
+
+        <div class="footer">
+            <p>Powered by Khaled Mahmoud</p>
+        </div>
+    </div>
+
+    <script>
+        const API_KEY = 'tools_f03e453bab5ab59ec78811379dc82a25d54b8dc1';
+        const REAL_URL = 'https://api.toolsmarket.online';
+        const PROXIES = [
+            '',                                        // Direct (API might support CORS)
+            'https://corsproxy.io/?',
+            'https://api.codetabs.com/v1/proxy?quest=',
+        ];
+        const HEADERS = { 'X-API-Key': API_KEY, 'Content-Type': 'application/json' };
+
+        let productId = null;
+        let productPrice = 0;
+        let workingProxy = null; // cache the proxy that worked
+
+        // Smart fetch: tries proxies in order until one works
+        async function apiRequest(path, options = {}) {
+            const list = workingProxy !== null
+                ? [workingProxy, ...PROXIES.filter(p => p !== workingProxy)]
+                : PROXIES;
+
+            for (const proxy of list) {
+                try {
+                    const url = proxy + REAL_URL + path;
+                    const res = await fetch(url, { ...options, headers: HEADERS });
+                    workingProxy = proxy; // remember what worked
+                    return res;
+                } catch (e) {
+                    // try next proxy
+                }
+            }
+            throw new Error('تعذر الاتصال بالخادم. تحقق من الاتصال بالإنترنت.');
+        }
+
+        // ── Load product info on startup ─────────────────────────
+        async function loadProduct() {
+            try {
+                const res = await apiRequest('/api/v1/products');
+                const data = await res.json();
+                if (!data.ok) throw new Error('Failed to load products');
+
+                // Find Gemini 18 months product
+                const gemini = data.products.find(p =>
+                    p.name.toLowerCase().includes('gemini') &&
+                    (p.name.includes('18') || p.name.toLowerCase().includes('months'))
+                ) || data.products.find(p => p.name.toLowerCase().includes('gemini'));
+
+                if (gemini) {
+                    productId = gemini.product_id;
+                    productPrice = gemini.price;
+                    document.getElementById('priceTag').textContent = `💵 $${gemini.price.toFixed(2)} / Link`;
+                    if (gemini.stock === 0) {
+                        document.getElementById('buyBtn').disabled = true;
+                    }
+                    updateTotalLabel();
+                } else {
+                    document.getElementById('priceTag').textContent = '⚠️ تعذر التحميل';
+                    showToast('تعذر تحميل بيانات المنتج', 'error');
+                }
+            } catch (e) {
+                document.getElementById('priceTag').textContent = '⚠️ خطأ في الاتصال';
+                showToast('تعذر الاتصال بالخادم', 'error');
+            }
+        }
+
+        // ── Quantity helpers ─────────────────────────────────────
+        function changeQty(delta) {
+            const input = document.getElementById('qtyInput');
+            let val = parseInt(input.value) + delta;
+            if (val < 1) val = 1;
+            if (val > 50) val = 50;
+            input.value = val;
+            updateTotalLabel();
+        }
+
+        document.getElementById('qtyInput').addEventListener('input', updateTotalLabel);
+
+        function updateTotalLabel() {
+            const qty = parseInt(document.getElementById('qtyInput').value) || 1;
+            const total = (qty * productPrice).toFixed(2);
+            document.getElementById('totalCostLabel').textContent =
+                productPrice > 0 ? `الإجمالي: $${total}` : '';
+        }
+
+        // ── Fetch Balance ────────────────────────────────────────
+        async function fetchBalance() {
+            const btn = document.getElementById('balanceBtn');
+            btn.disabled = true;
+            btn.innerHTML = '<div class="spinner"></div> جاري الجلب...';
+
+            try {
+                const res = await apiRequest('/api/v1/balance');
+                const data = await res.json();
+
+                if (!data.ok) throw new Error(data.message || 'خطأ من الخادم');
+
+                const box = document.getElementById('balanceResult');
+                box.style.display = 'block';
+
+                const bal = parseFloat(data.balance);
+                const remaining = productPrice > 0 ? Math.floor(bal / productPrice) : '—';
+
+                document.getElementById('userInfo').innerHTML = `
+        <div class="user-row">
+          <span class="key">👤 المستخدم</span>
+          <span class="val">@${data.username || data.user_id}</span>
+        </div>
+        <div class="user-row">
+          <span class="key">💰 الرصيد</span>
+          <span class="val big">$${bal.toFixed(2)}</span>
+        </div>
+        <div class="user-row">
+          <span class="key">🤖 التفعيلات الباقية</span>
+          <span class="val" style="color:var(--gem); font-size:18px; font-weight:800">${remaining} </span>
+        </div>
+        <div class="user-row">
+          <span class="key">🏷️ نوع الحساب</span>
+          <span class="val">${data.is_reseller ? '★ Reseller' : 'Pro'}</span>
+        </div>
+      `;
+
+                btn.innerHTML = '<span>✅</span> تم التحديث';
+                setTimeout(() => {
+                    btn.disabled = false;
+                    btn.innerHTML = '<span>🔄</span> تحديث الرصيد';
+                }, 3000);
+
+            } catch (e) {
+                showToast('خطأ: ' + e.message, 'error');
+                btn.disabled = false;
+                btn.innerHTML = '<span>🔄</span> عرض الرصيد والحساب';
+            }
+        }
+
+        // ── Purchase ─────────────────────────────────────────────
+        async function purchaseProduct() {
+            if (!productId) { showToast('المنتج لم يُحمَّل بعد، انتظر لحظة', 'error'); return; }
+
+            const qty = parseInt(document.getElementById('qtyInput').value) || 1;
+            const btn = document.getElementById('buyBtn');
+
+            btn.disabled = true;
+            btn.innerHTML = '<div class="spinner"></div> جاري الشراء...';
+
+            const resultBox = document.getElementById('resultBox');
+            resultBox.style.display = 'none';
+
+            try {
+                const res = await apiRequest('/api/v1/buy', {
+                    method: 'POST',
+                    body: JSON.stringify({ product_id: productId, quantity: qty })
+                });
+                const data = await res.json();
+
+                if (!data.ok) throw new Error(data.message || data.error || 'فشلت عملية الشراء');
+
+                // ── SUCCESS ──
+                let linksHtml = '';
+                (data.codes || []).forEach((code, i) => {
+                    const id = `link-${i}`;
+                    linksHtml += `
+          <div class="link-item">
+            <a href="${code}" target="_blank" class="link-text" id="${id}">${code}</a>
+            <button class="copy-btn" onclick="copyLink('${id}', this)">نسخ</button>
+          </div>`;
+                });
+
+                const newBal = parseFloat(data.new_balance || 0);
+                const remAfterBuy = productPrice > 0 ? Math.floor(newBal / productPrice) : '—';
+
+                resultBox.innerHTML = `
+        <div class="result-success">
+          <div class="result-header">
+            <span style="font-size:22px">🎉</span>
+            تمت العملية بنجاح! — ${data.quantity} رابط تفعيل
+          </div>
+          <div class="user-row" style="padding-top:0">
+            <span class="key">💸 التكلفة</span>
+            <span class="val">$${data.total_cost?.toFixed(2)}</span>
+          </div>
+          <div class="user-row">
+            <span class="key">💰 الرصيد المتبقي</span>
+            <span class="val" style="color:var(--gem)">$${newBal.toFixed(2)}</span>
+          </div>
+          <div class="user-row">
+            <span class="key">🤖 التفعيلات الباقية</span>
+            <span class="val" style="color:var(--gem); font-size:18px; font-weight:800">${remAfterBuy} تفعيل</span>
+          </div>
+          <div class="divider"></div>
+          <div style="margin-top:4px; font-size:13px; color:var(--muted); margin-bottom:12px">
+            🔗 روابط التفعيل — اضغط للفتح أو انسخ الرابط
+          </div>
+          ${linksHtml}
+        </div>`;
+
+                resultBox.style.display = 'block';
+                showToast('تم الشراء بنجاح! 🎉', 'success');
+                loadProduct();   // refresh stock
+                fetchBalance();  // refresh balance display automatically
+
+            } catch (e) {
+                resultBox.innerHTML = `
+        <div class="result-error">
+          <div class="result-header">
+            <span style="font-size:22px">❌</span>
+            فشلت العملية
+          </div>
+          <div style="font-size:14px; color:var(--muted); margin-top:8px">${e.message}</div>
+        </div>`;
+                resultBox.style.display = 'block';
+                showToast('فشلت العملية', 'error');
+            }
+
+            btn.disabled = false;
+            btn.innerHTML = '<span>🛒</span> اشتري الآن';
+        }
+
+        // ── Copy Link ────────────────────────────────────────────
+        function copyLink(id, btn) {
+            const text = document.getElementById(id).textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                btn.textContent = '✓ تم النسخ';
+                btn.classList.add('copied');
+                setTimeout(() => { btn.textContent = 'نسخ'; btn.classList.remove('copied'); }, 2500);
+            });
+        }
+
+        // ── Toast ────────────────────────────────────────────────
+        let toastTimer;
+        function showToast(msg, type = 'success') {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.className = `show ${type}`;
+            clearTimeout(toastTimer);
+            toastTimer = setTimeout(() => { toast.className = ''; }, 3500);
+        }
+
+        // ── Init ─────────────────────────────────────────────────
+        loadProduct();
+    </script>
+</body>
+
+</html>
