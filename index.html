@@ -1,45 +1,31 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Gemini 18 Months — Activation Store</title>
-
     <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Cairo:wght@400;600;700;800&display=swap"
         rel="stylesheet" />
-
     <style>
         :root {
             --bg: #060b14;
             --surface: #0d1626;
             --surface2: #121e33;
-            --surface3: #172641;
-            --border: rgba(99, 179, 237, 0.14);
+            --border: rgba(99, 179, 237, 0.12);
             --accent: #4f8ef7;
             --accent2: #8b5cf6;
             --gem: #1de9b6;
             --text: #e8f0fe;
-            --muted: #8ca0bf;
+            --muted: #7a90b0;
             --success: #22c55e;
             --danger: #ef4444;
             --warning: #f59e0b;
             --radius: 16px;
             --shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
         }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             background: var(--bg);
@@ -66,13 +52,8 @@
         }
 
         @keyframes bgPulse {
-            0% {
-                transform: scale(1) rotate(0deg);
-            }
-
-            100% {
-                transform: scale(1.05) rotate(2deg);
-            }
+            0% { transform: scale(1) rotate(0deg); }
+            100% { transform: scale(1.05) rotate(2deg); }
         }
 
         .container {
@@ -83,10 +64,7 @@
             padding: 32px 20px 60px;
         }
 
-        .header {
-            text-align: center;
-            margin-bottom: 34px;
-        }
+        .header { text-align: center; margin-bottom: 40px; }
 
         .logo-ring {
             width: 80px;
@@ -103,19 +81,13 @@
         }
 
         @keyframes logoGlow {
-            0% {
-                box-shadow: 0 0 30px rgba(79, 142, 247, 0.4), 0 0 60px rgba(139, 92, 246, 0.2);
-            }
-
-            100% {
-                box-shadow: 0 0 50px rgba(79, 142, 247, 0.6), 0 0 100px rgba(29, 233, 182, 0.3);
-            }
+            0% { box-shadow: 0 0 30px rgba(79, 142, 247, 0.4), 0 0 60px rgba(139, 92, 246, 0.2); }
+            100% { box-shadow: 0 0 50px rgba(79, 142, 247, 0.6), 0 0 100px rgba(29, 233, 182, 0.3); }
         }
 
         .header h1 {
             font-size: 28px;
             font-weight: 800;
-            line-height: 1.35;
             background: linear-gradient(135deg, #fff 0%, var(--gem) 50%, var(--accent) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -123,32 +95,35 @@
             margin-bottom: 8px;
         }
 
-        .header p {
-            color: var(--muted);
-            font-size: 14px;
-        }
+        .header p { color: var(--muted); font-size: 14px; }
 
         .card {
-            background: rgba(13, 22, 38, 0.92);
+            background: var(--surface);
             border: 1px solid var(--border);
             border-radius: var(--radius);
             padding: 28px;
             margin-bottom: 20px;
             box-shadow: var(--shadow);
+            transition: border-color 0.3s, box-shadow 0.3s;
             position: relative;
             overflow: hidden;
-            backdrop-filter: blur(14px);
         }
 
         .card::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
+            top: 0; left: 0; right: 0;
             height: 2px;
             background: linear-gradient(90deg, transparent, var(--accent), var(--accent2), transparent);
-            opacity: 0.9;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .card:hover::before { opacity: 1; }
+
+        .card:hover {
+            border-color: rgba(99, 179, 237, 0.25);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(79, 142, 247, 0.1);
         }
 
         .card-title {
@@ -173,6 +148,92 @@
             flex-shrink: 0;
         }
 
+        .balance-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px; }
+
+        .stat-box {
+            background: var(--surface2);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+        }
+
+        .stat-box .val { font-size: 22px; font-weight: 800; color: var(--gem); margin-bottom: 4px; }
+        .stat-box .lbl { font-size: 12px; color: var(--muted); }
+
+        .product-banner {
+            background: linear-gradient(135deg, rgba(79, 142, 247, 0.15), rgba(139, 92, 246, 0.15));
+            border: 1px solid rgba(79, 142, 247, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .product-icon { font-size: 40px; flex-shrink: 0; }
+        .product-info h3 { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+        .product-meta { display: flex; flex-wrap: wrap; gap: 10px; }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .badge-price { background: rgba(34, 197, 94, 0.15); color: var(--success); border: 1px solid rgba(34, 197, 94, 0.3); }
+        .badge-stock { background: rgba(245, 158, 11, 0.15); color: var(--warning); border: 1px solid rgba(245, 158, 11, 0.3); }
+        .badge-auto { background: rgba(79, 142, 247, 0.15); color: var(--accent); border: 1px solid rgba(79, 142, 247, 0.3); }
+
+        .qty-row { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+        .qty-label { font-size: 14px; color: var(--muted); white-space: nowrap; }
+
+        .qty-control {
+            display: flex;
+            align-items: center;
+            background: var(--surface2);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .qty-btn {
+            width: 40px; height: 40px;
+            background: transparent;
+            border: none;
+            color: var(--text);
+            font-size: 20px;
+            cursor: pointer;
+            transition: background 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .qty-btn:hover { background: rgba(79, 142, 247, 0.15); }
+        .qty-btn:active { background: rgba(79, 142, 247, 0.3); }
+
+        #qtyInput {
+            width: 60px;
+            text-align: center;
+            background: transparent;
+            border: none;
+            color: var(--text);
+            font-size: 18px;
+            font-weight: 700;
+            font-family: inherit;
+            outline: none;
+            -moz-appearance: textfield;
+        }
+
+        #qtyInput::-webkit-outer-spin-button,
+        #qtyInput::-webkit-inner-spin-button { -webkit-appearance: none; }
+
         .btn {
             width: 100%;
             padding: 14px 24px;
@@ -191,9 +252,16 @@
             overflow: hidden;
         }
 
-        .btn:hover {
-            transform: translateY(-2px);
+        .btn::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: white;
+            opacity: 0;
+            transition: opacity 0.2s;
         }
+
+        .btn:active::after { opacity: 0.08; }
 
         .btn-primary {
             background: linear-gradient(135deg, var(--accent), var(--accent2));
@@ -201,292 +269,41 @@
             box-shadow: 0 4px 20px rgba(79, 142, 247, 0.35);
         }
 
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(79, 142, 247, 0.5); }
+
         .btn-secondary {
             background: var(--surface2);
             color: var(--text);
             border: 1px solid var(--border);
         }
 
-        .btn:disabled {
-            opacity: 0.55;
-            cursor: not-allowed;
-            transform: none !important;
-        }
+        .btn-secondary:hover { border-color: var(--accent); background: rgba(79, 142, 247, 0.1); }
+
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none !important; }
 
         .spinner {
-            width: 18px;
-            height: 18px;
+            width: 18px; height: 18px;
             border: 2px solid rgba(255, 255, 255, 0.3);
             border-top-color: white;
             border-radius: 50%;
             animation: spin 0.7s linear infinite;
         }
 
-        @keyframes spin {
-            to {
-                transform: rotate(360deg);
-            }
-        }
+        @keyframes spin { to { transform: rotate(360deg); } }
 
-        .divider {
-            height: 1px;
-            background: var(--border);
-            margin: 18px 0;
-        }
-
-        .summary-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-bottom: 16px;
-        }
-
-        .stat-box {
-            background: var(--surface2);
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            padding: 16px;
-            text-align: center;
-        }
-
-        .stat-box .val {
-            font-size: 22px;
-            font-weight: 800;
-            color: var(--gem);
-            margin-bottom: 4px;
-            direction: ltr;
-        }
-
-        .stat-box .lbl {
-            font-size: 12px;
-            color: var(--muted);
-        }
-
-        #balanceResult {
-            display: none;
-            margin-top: 16px;
-            animation: fadeInUp 0.35s ease;
-        }
-
-        .user-info {
-            background: var(--surface2);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 16px;
-        }
-
-        .user-row {
-            display: flex;
-            justify-content: space-between;
-            gap: 14px;
-            align-items: center;
-            padding: 9px 0;
-            border-bottom: 1px solid var(--border);
-            font-size: 14px;
-        }
-
-        .user-row:last-child {
-            border-bottom: none;
-        }
-
-        .user-row .key {
-            color: var(--muted);
-        }
-
-        .user-row .val {
-            font-weight: 700;
-            color: var(--text);
-            text-align: left;
-            direction: ltr;
-            word-break: break-word;
-        }
-
-        .user-row .val.big {
-            font-size: 20px;
-            color: var(--gem);
-        }
-
-        .sync-note {
-            margin-top: 12px;
-            font-size: 12px;
-            color: var(--muted);
-            text-align: center;
-        }
-
-        .product-banner {
-            background: linear-gradient(135deg, rgba(79, 142, 247, 0.15), rgba(139, 92, 246, 0.15));
-            border: 1px solid rgba(79, 142, 247, 0.3);
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 16px;
-        }
-
-        .product-icon {
-            font-size: 40px;
-            flex-shrink: 0;
-        }
-
-        .product-info h3 {
-            font-size: 16px;
-            font-weight: 700;
-            color: var(--text);
-            margin-bottom: 8px;
-            direction: ltr;
-            text-align: left;
-        }
-
-        .product-meta {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 700;
-        }
-
-        .badge-price {
-            background: rgba(34, 197, 94, 0.15);
-            color: var(--success);
-            border: 1px solid rgba(34, 197, 94, 0.3);
-        }
-
-        .badge-stock {
-            background: rgba(245, 158, 11, 0.15);
-            color: var(--warning);
-            border: 1px solid rgba(245, 158, 11, 0.3);
-        }
-
-        .badge-auto {
-            background: rgba(79, 142, 247, 0.15);
-            color: var(--accent);
-            border: 1px solid rgba(79, 142, 247, 0.3);
-        }
-
-        .qty-row {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-        }
-
-        .qty-label {
-            font-size: 14px;
-            color: var(--muted);
-            white-space: nowrap;
-        }
-
-        .qty-control {
-            display: flex;
-            align-items: center;
-            background: var(--surface2);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            overflow: hidden;
-        }
-
-        .qty-btn {
-            width: 40px;
-            height: 40px;
-            background: transparent;
-            border: none;
-            color: var(--text);
-            font-size: 20px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .qty-btn:hover {
-            background: rgba(79, 142, 247, 0.15);
-        }
-
-        #qtyInput {
-            width: 60px;
-            text-align: center;
-            background: transparent;
-            border: none;
-            color: var(--text);
-            font-size: 18px;
-            font-weight: 800;
-            font-family: inherit;
-            outline: none;
-            -moz-appearance: textfield;
-        }
-
-        #qtyInput::-webkit-outer-spin-button,
-        #qtyInput::-webkit-inner-spin-button {
-            -webkit-appearance: none;
-        }
-
-        #resultBox {
-            display: none;
-            margin-top: 20px;
-            animation: fadeInUp 0.35s ease;
-        }
+        #resultBox { display: none; margin-top: 20px; animation: fadeInUp 0.4s ease; }
 
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(16px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(16px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        .result-success,
-        .result-error {
-            border-radius: 12px;
-            padding: 20px;
-        }
+        .result-success { background: rgba(34, 197, 94, 0.08); border: 1px solid rgba(34, 197, 94, 0.3); border-radius: 12px; padding: 20px; }
+        .result-error { background: rgba(239, 68, 68, 0.08); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 12px; padding: 20px; }
 
-        .result-success {
-            background: rgba(34, 197, 94, 0.08);
-            border: 1px solid rgba(34, 197, 94, 0.3);
-        }
-
-        .result-error {
-            background: rgba(239, 68, 68, 0.08);
-            border: 1px solid rgba(239, 68, 68, 0.3);
-        }
-
-        .result-header {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 14px;
-            font-weight: 800;
-            font-size: 15px;
-        }
-
-        .result-success .result-header {
-            color: var(--success);
-        }
-
-        .result-error .result-header {
-            color: var(--danger);
-        }
-
-        .result-text {
-            font-size: 13px;
-            color: var(--muted);
-            line-height: 1.8;
-            margin-bottom: 12px;
-        }
+        .result-header { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; font-weight: 700; font-size: 15px; }
+        .result-success .result-header { color: var(--success); }
+        .result-error .result-header { color: var(--danger); }
 
         .link-item {
             background: var(--surface2);
@@ -514,805 +331,234 @@
             border: 1px solid rgba(79, 142, 247, 0.3);
             color: var(--accent);
             border-radius: 8px;
-            padding: 7px 12px;
+            padding: 6px 12px;
             font-size: 12px;
-            font-weight: 700;
+            font-weight: 600;
             cursor: pointer;
+            transition: all 0.2s;
             white-space: nowrap;
             font-family: inherit;
         }
 
-        .copy-btn.copied {
-            background: rgba(34, 197, 94, 0.2);
-            border-color: rgba(34, 197, 94, 0.4);
-            color: var(--success);
+        .copy-btn:hover { background: rgba(79, 142, 247, 0.3); }
+
+        .copy-btn.copied { background: rgba(34, 197, 94, 0.2); border-color: rgba(34, 197, 94, 0.4); color: var(--success); }
+
+        #balanceResult { margin-top: 16px; animation: fadeInUp 0.4s ease; }
+
+        .user-info { background: var(--surface2); border: 1px solid var(--border); border-radius: 12px; padding: 16px; }
+
+        .user-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 14px;
         }
+
+        .user-row:last-child { border-bottom: none; padding-bottom: 0; }
+        .user-row:first-child { padding-top: 0; }
+        .user-row .key { color: var(--muted); }
+        .user-row .val { font-weight: 600; color: var(--text); }
+        .user-row .val.big { font-size: 20px; font-weight: 800; color: var(--gem); }
+
+        .balance-loading { text-align: center; color: var(--muted); font-size: 14px; padding: 10px 0; }
+
+        .footer { text-align: center; margin-top: 40px; color: var(--muted); font-size: 12px; opacity: 0.6; }
+
+        .divider { height: 1px; background: var(--border); margin: 20px 0; }
 
         #toast {
             position: fixed;
-            bottom: 28px;
+            bottom: 30px;
             left: 50%;
             transform: translateX(-50%) translateY(80px);
             background: var(--surface2);
             border: 1px solid var(--border);
             border-radius: 12px;
-            padding: 12px 22px;
+            padding: 12px 24px;
             font-size: 14px;
-            font-weight: 700;
+            font-weight: 600;
             box-shadow: var(--shadow);
             transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
             z-index: 999;
             white-space: nowrap;
         }
 
-        #toast.show {
-            transform: translateX(-50%) translateY(0);
-        }
-
-        #toast.success {
-            color: var(--success);
-            border-color: rgba(34, 197, 94, 0.3);
-        }
-
-        #toast.error {
-            color: var(--danger);
-            border-color: rgba(239, 68, 68, 0.3);
-        }
-
-        #toast.warning {
-            color: var(--warning);
-            border-color: rgba(245, 158, 11, 0.3);
-        }
-
-        .footer {
-            text-align: center;
-            margin-top: 40px;
-            color: var(--muted);
-            font-size: 12px;
-            opacity: 0.7;
-        }
+        #toast.show { transform: translateX(-50%) translateY(0); }
+        #toast.success { color: var(--success); border-color: rgba(34, 197, 94, 0.3); }
+        #toast.error { color: var(--danger); border-color: rgba(239, 68, 68, 0.3); }
 
         @media (max-width: 480px) {
-            .container {
-                padding: 24px 14px 50px;
-            }
-
-            .card {
-                padding: 22px 16px;
-            }
-
-            .header h1 {
-                font-size: 22px;
-            }
-
-            .summary-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .product-banner {
-                align-items: flex-start;
-            }
-
-            .product-info h3 {
-                font-size: 14px;
-            }
+            .balance-grid { grid-template-columns: 1fr; }
+            .header h1 { font-size: 22px; }
         }
     </style>
 </head>
-
 <body>
-    <div id="toast"></div>
+<div id="toast"></div>
 
-    <div class="container">
+<div class="container">
 
-        <div class="header">
-            <div class="logo-ring">✦</div>
-            <h1>اشتراك Gemini Pro من إعداد حازم محمود</h1>
-            <p>احصل على Gemini Pro لمدة 18 شهر — فوري وآمن</p>
-        </div>
-
-        <div class="card">
-            <div class="card-title">
-                <div class="icon">💰</div>
-                معلومات الحساب والرصيد
-            </div>
-
-            <div class="summary-grid">
-                <div class="stat-box">
-                    <div class="val" id="balanceTop">--</div>
-                    <div class="lbl">الرصيد الحالي</div>
-                </div>
-
-                <div class="stat-box">
-                    <div class="val" id="activationsTop">--</div>
-                    <div class="lbl">التفعيلات المتاحة</div>
-                </div>
-            </div>
-
-            <button class="btn btn-secondary" id="balanceBtn" onclick="toggleAccountBox()">
-                <span>👁️</span> عرض الرصيد والحساب
-            </button>
-
-            <div id="balanceResult">
-                <div class="divider"></div>
-                <div class="user-info" id="userInfo"></div>
-            </div>
-
-            <div class="sync-note" id="syncNote">يتم تحديث البيانات تلقائيًا.</div>
-        </div>
-
-        <div class="card">
-            <div class="card-title">
-                <div class="icon">✦</div>
-                شراء Gemini Pro — 18 شهر
-            </div>
-
-            <div class="product-banner">
-                <div class="product-icon">🤖</div>
-                <div class="product-info">
-                    <h3 id="productName">Gemini Pro 18 months Activation Link</h3>
-                    <div class="product-meta">
-                        <span class="badge badge-price" id="priceTag">جاري تحميل السعر...</span>
-                        <span class="badge badge-stock" id="stockTag">جاري تحميل المتاح...</span>
-                        <span class="badge badge-auto">تحديث تلقائي</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="qty-row">
-                <span class="qty-label">الكمية:</span>
-
-                <div class="qty-control">
-                    <button class="qty-btn" type="button" onclick="changeQty(-1)">−</button>
-                    <input type="number" id="qtyInput" value="1" min="1" max="50" inputmode="numeric" />
-                    <button class="qty-btn" type="button" onclick="changeQty(1)">+</button>
-                </div>
-
-                <span class="qty-label" id="totalCostLabel" style="color:var(--gem); font-weight:800; font-size:16px;"></span>
-            </div>
-
-            <button class="btn btn-primary" id="buyBtn" onclick="purchaseProduct()">
-                <span>🛒</span> اشتري الآن
-            </button>
-
-            <div id="resultBox"></div>
-        </div>
-
-        <div class="footer">
-            <p>Powered by Hazem Mahmoud</p>
-        </div>
-
+    <!-- Header -->
+    <div class="header">
+        <div class="logo-ring">✦</div>
+        <h1>اشتراك Gemini Pro من اعداد حازم محمود</h1>
+        <p>احصل على Gemini Pro 18 شهر — فوري وآمن</p>
     </div>
 
-    <script>
-        const API_KEY = 'tools_f03e453bab5ab59ec78811379dc82a25d54b8dc1';
-        const REAL_URL = 'https://api.toolsmarket.online';
+    <!-- Balance Card (auto updates, no manual button) -->
+    <div class="card">
+        <div class="card-title">
+            <div class="icon">💰</div>
+            معلومات الحساب والرصيد
+        </div>
 
-        const PRODUCTS_PATH = '/api/v1/products';
-        const PURCHASE_PATH = '/api/v1/purchase';
+        <div id="balanceResult">
+            <div class="user-info" id="userInfo">
+                <div class="balance-loading">⏳ جاري تحميل بيانات الحساب...</div>
+            </div>
+        </div>
+    </div>
 
-        const ACCOUNT_PATHS = [
-            '/api/v1/user',
-            '/api/v1/balance',
-            '/api/v1/profile',
-            '/api/v1/account',
-            '/api/v1/me'
-        ];
+    <!-- Purchase Card -->
+    <div class="card">
+        <div class="card-title">
+            <div class="icon">✦</div>
+            شراء Gemini Pro — 18 شهر
+        </div>
 
-        const PRODUCT_KEYWORDS = ['gemini', '18', 'month'];
+        <!-- Product Banner -->
+        <div class="product-banner">
+            <div class="product-icon">🤖</div>
+            <div class="product-info">
+                <h3>Gemini Pro 18 months Activation Link</h3>
+                <div class="product-meta">
+                    <span class="badge badge-price" id="priceTag">جاري التحميل...</span>
+                </div>
+            </div>
+        </div>
 
-        const PROXIES = [
-            '',
-            'https://corsproxy.io/?',
-            'https://api.codetabs.com/v1/proxy?quest='
-        ];
+        <!-- Quantity -->
+        <div class="qty-row">
+            <span class="qty-label">الكمية:</span>
+            <div class="qty-control">
+                <button class="qty-btn" onclick="changeQty(-1)">−</button>
+                <input type="number" id="qtyInput" value="1" min="1" max="50" />
+                <button class="qty-btn" onclick="changeQty(1)">+</button>
+            </div>
+            <span class="qty-label" id="totalCostLabel" style="color:var(--gem); font-weight:700; font-size:16px;"></span>
+        </div>
 
-        const DEFAULT_HEADERS = {
-            'X-API-Key': API_KEY,
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-        };
+        <!-- Buy Button -->
+        <button class="btn btn-primary" id="buyBtn" onclick="purchaseProduct()">
+            <span>🛒</span> اشتري الآن
+        </button>
 
-        let productId = null;
-        let productPrice = 0;
-        let productStock = null;
-        let workingProxy = null;
-        let accountBoxVisible = false;
-        let autoSyncTimer = null;
-        let isSyncing = false;
-        let lastSyncAt = null;
-        let lastAccountData = null;
-        let lastProductData = null;
+        <!-- Result -->
+        <div id="resultBox"></div>
+    </div>
 
-        function safeText(value, fallback = '-') {
-            if (value === null || value === undefined || value === '') return fallback;
-            return String(value);
-        }
+    <div class="footer">
+        <p>Powered by Khaled Mahmoud</p>
+    </div>
+</div>
 
-        function toNumber(value, fallback = 0) {
-            const n = Number(value);
-            return Number.isFinite(n) ? n : fallback;
-        }
+<script>
+    const API_KEY = 'tools_f03e453bab5ab59ec78811379dc82a25d54b8dc1';
+    const REAL_URL = 'https://api.toolsmarket.online';
+    const PROXIES = [
+        '',
+        'https://corsproxy.io/?',
+        'https://api.codetabs.com/v1/proxy?quest=',
+    ];
+    const HEADERS = { 'X-API-Key': API_KEY, 'Content-Type': 'application/json' };
 
-        function showToast(message, type = 'success') {
-            const toast = document.getElementById('toast');
-            toast.textContent = message;
-            toast.className = type;
-            toast.classList.add('show');
+    let productId = null;
+    let productPrice = 0;
+    let workingProxy = null;
 
-            clearTimeout(showToast.timer);
-            showToast.timer = setTimeout(() => {
-                toast.classList.remove('show');
-            }, 2600);
-        }
+    async function apiRequest(path, options = {}) {
+        const list = workingProxy !== null
+            ? [workingProxy, ...PROXIES.filter(p => p !== workingProxy)]
+            : PROXIES;
 
-        function setButtonLoading(button, isLoading, loadingText, normalHtml) {
-            if (!button) return;
-
-            button.disabled = isLoading;
-            button.innerHTML = isLoading
-                ? `<span class="spinner"></span> ${loadingText}`
-                : normalHtml;
-        }
-
-        function updateSyncNote() {
-            const note = document.getElementById('syncNote');
-
-            if (!lastSyncAt) {
-                note.textContent = 'يتم تحديث البيانات تلقائيًا.';
-                return;
-            }
-
-            note.textContent = `آخر تحديث تلقائي: ${lastSyncAt.toLocaleTimeString('ar-EG')}`;
-        }
-
-        async function apiRequest(path, options = {}) {
-            const method = (options.method || 'GET').toUpperCase();
-            let finalPath = path;
-
-            if (method === 'GET') {
-                const separator = finalPath.includes('?') ? '&' : '?';
-                finalPath += `${separator}_t=${Date.now()}`;
-            }
-
-            const list = workingProxy !== null
-                ? [workingProxy, ...PROXIES.filter(p => p !== workingProxy)]
-                : PROXIES;
-
-            let lastError = null;
-
-            for (const proxy of list) {
-                try {
-                    const url = proxy + REAL_URL + finalPath;
-
-                    const res = await fetch(url, {
-                        ...options,
-                        method,
-                        cache: 'no-store',
-                        headers: {
-                            ...DEFAULT_HEADERS,
-                            ...(options.headers || {}),
-                            'Cache-Control': 'no-cache',
-                            'Pragma': 'no-cache'
-                        }
-                    });
-
-                    workingProxy = proxy;
-                    return res;
-                } catch (err) {
-                    lastError = err;
-                }
-            }
-
-            throw new Error(lastError?.message || 'تعذر الاتصال بالخادم');
-        }
-
-        async function readJsonResponse(res) {
-            const text = await res.text();
-
-            if (!text) return {};
-
+        for (const proxy of list) {
             try {
-                return JSON.parse(text);
-            } catch {
-                return { raw: text };
+                const url = proxy + REAL_URL + path;
+                const res = await fetch(url, { ...options, headers: HEADERS });
+                workingProxy = proxy;
+                return res;
+            } catch (e) {
+                // try next proxy
             }
         }
-
-        async function apiGetFirstOk(paths) {
-            let lastData = null;
-            let lastStatus = 0;
-
-            for (const path of paths) {
-                const res = await apiRequest(path);
-                const data = await readJsonResponse(res);
-
-                lastData = data;
-                lastStatus = res.status;
-
-                if (res.ok) {
-                    return data;
-                }
-            }
-
-            throw new Error(lastData?.message || lastData?.error || `فشل تحميل بيانات الحساب - status ${lastStatus}`);
-        }
-
-        function getFirstObject(data) {
-            if (!data || typeof data !== 'object') return {};
-
-            if (data.user && typeof data.user === 'object') return data.user;
-            if (data.account && typeof data.account === 'object') return data.account;
-            if (data.profile && typeof data.profile === 'object') return data.profile;
-
-            if (data.data && typeof data.data === 'object' && !Array.isArray(data.data)) {
-                if (data.data.user && typeof data.data.user === 'object') return data.data.user;
-                if (data.data.account && typeof data.data.account === 'object') return data.data.account;
-                return data.data;
-            }
-
-            if (data.result && typeof data.result === 'object' && !Array.isArray(data.result)) {
-                return data.result;
-            }
-
-            return data;
-        }
-
-        function normalizeProductsResponse(data) {
-            if (Array.isArray(data)) return data;
-            if (Array.isArray(data.products)) return data.products;
-            if (Array.isArray(data.data)) return data.data;
-            if (Array.isArray(data.items)) return data.items;
-            if (Array.isArray(data.result)) return data.result;
-            return [];
-        }
-
-        function getProductName(product) {
-            return safeText(
-                product.name ??
-                product.title ??
-                product.product_name ??
-                product.label,
-                'Gemini Pro 18 months Activation Link'
-            );
-        }
-
-        function getProductPrice(product) {
-            return toNumber(
-                product.price ??
-                product.cost ??
-                product.amount ??
-                product.coin_price ??
-                product.coins,
-                0
-            );
-        }
-
-        function getProductStock(product) {
-            return product.stock ??
-                product.available ??
-                product.quantity ??
-                product.remaining ??
-                product.count ??
-                product.available_count ??
-                product.activation_left ??
-                product.activations_left ??
-                null;
-        }
-
-        function findGeminiProduct(products) {
-            if (!products.length) return null;
-
-            const scored = products.map(product => {
-                const name = getProductName(product).toLowerCase();
-                let score = 0;
-
-                for (const word of PRODUCT_KEYWORDS) {
-                    if (name.includes(word)) score++;
-                }
-
-                return { product, score };
-            });
-
-            scored.sort((a, b) => b.score - a.score);
-            return scored[0].product;
-        }
-
-        async function loadProduct() {
-            const priceTag = document.getElementById('priceTag');
-            const stockTag = document.getElementById('stockTag');
-            const productNameEl = document.getElementById('productName');
-
-            const res = await apiRequest(PRODUCTS_PATH);
-            const data = await readJsonResponse(res);
-
-            if (!res.ok) {
-                throw new Error(data.message || data.error || 'فشل تحميل المنتج');
-            }
-
-            const products = normalizeProductsResponse(data);
-            const product = findGeminiProduct(products);
-
-            if (!product) {
-                throw new Error('لم يتم العثور على منتج Gemini');
-            }
-
-            lastProductData = product;
-
-            productId = product.id ?? product.product_id ?? product.uuid ?? product._id;
-            productPrice = getProductPrice(product);
-            productStock = getProductStock(product);
-
-            const name = getProductName(product);
-            productNameEl.textContent = name;
-
-            priceTag.textContent = productPrice > 0
-                ? `السعر: ${productPrice} coin`
-                : 'السعر غير متاح';
-
-            stockTag.textContent = productStock !== null
-                ? `المتاح: ${productStock}`
-                : 'المتاح غير محدد';
-
-            document.getElementById('activationsTop').textContent =
-                productStock !== null ? productStock : '--';
-
-            updateTotalCost();
-        }
-
-        function getBalanceFromAccount(data) {
-            const root = getFirstObject(data);
-
-            return root.balance ??
-                root.coins ??
-                root.credit ??
-                root.credits ??
-                root.wallet ??
-                root.amount ??
-                data.balance ??
-                data.coins ??
-                0;
-        }
-
-        function getAccountName(data) {
-            const root = getFirstObject(data);
-
-            return root.username ??
-                root.name ??
-                root.email ??
-                root.user_email ??
-                root.id ??
-                'غير متاح';
-        }
-
-        function getActivationsFromAccount(data) {
-            const root = getFirstObject(data);
-
-            return root.activations_left ??
-                root.remaining_activations ??
-                root.remaining ??
-                root.available ??
-                root.stock ??
-                root.activation_left ??
-                null;
-        }
-
-        function renderAccountInfo(accountData) {
-            const balance = getBalanceFromAccount(accountData);
-            const accountName = getAccountName(accountData);
-            const accountActivations = getActivationsFromAccount(accountData);
-            const activations = accountActivations ?? productStock ?? '--';
-
-            document.getElementById('balanceTop').textContent = `${balance} coin`;
-            document.getElementById('activationsTop').textContent = activations;
-
-            document.getElementById('userInfo').innerHTML = `
-                <div class="user-row">
-                    <span class="key">الحساب</span>
-                    <span class="val">${safeText(accountName)}</span>
-                </div>
-
-                <div class="user-row">
-                    <span class="key">الرصيد الحالي</span>
-                    <span class="val big">${safeText(balance)} coin</span>
-                </div>
-
-                <div class="user-row">
-                    <span class="key">التفعيلات المتاحة</span>
-                    <span class="val">${safeText(activations)}</span>
-                </div>
-
-                <div class="user-row">
-                    <span class="key">سعر المنتج</span>
-                    <span class="val">${safeText(productPrice)} coin</span>
-                </div>
-            `;
-        }
-
-        async function loadAccount() {
-            const data = await apiGetFirstOk(ACCOUNT_PATHS);
-            lastAccountData = data;
-            renderAccountInfo(data);
-        }
-
-        function toggleAccountBox() {
-            accountBoxVisible = !accountBoxVisible;
-
-            const box = document.getElementById('balanceResult');
-            const btn = document.getElementById('balanceBtn');
-
-            box.style.display = accountBoxVisible ? 'block' : 'none';
-
-            btn.innerHTML = accountBoxVisible
-                ? '<span>🙈</span> إخفاء الرصيد والحساب'
-                : '<span>👁️</span> عرض الرصيد والحساب';
-
-            if (accountBoxVisible) {
-                syncAllData({ showAccount: true, quiet: true });
-            }
-        }
-
-        function getQty() {
-            const input = document.getElementById('qtyInput');
-            const qty = parseInt(input.value || '1', 10);
-
-            return Math.min(Math.max(Number.isFinite(qty) ? qty : 1, 1), 50);
-        }
-
-        function updateTotalCost() {
-            const qty = getQty();
-            const total = qty * productPrice;
-            const label = document.getElementById('totalCostLabel');
-
-            if (!productPrice) {
-                label.textContent = '';
-                return;
-            }
-
-            label.textContent = `الإجمالي: ${total} coin`;
-        }
-
-        function changeQty(delta) {
-            const input = document.getElementById('qtyInput');
-            let value = getQty();
-
-            value += delta;
-            value = Math.min(Math.max(value, 1), 50);
-
-            input.value = value;
-            updateTotalCost();
-        }
-
-        function extractLinks(data) {
-            const possible =
-                data.links ??
-                data.link ??
-                data.activation_links ??
-                data.activation_link ??
-                data.codes ??
-                data.code ??
-                data.items ??
-                data.result ??
-                data.data;
-
-            if (Array.isArray(possible)) {
-                return possible.map(item => {
-                    if (typeof item === 'string') return item;
-
-                    return item.link ??
-                        item.url ??
-                        item.code ??
-                        item.value ??
-                        item.activation_link ??
-                        JSON.stringify(item);
-                }).filter(Boolean);
-            }
-
-            if (typeof possible === 'string') return [possible];
-
-            if (possible && typeof possible === 'object') {
-                const one =
-                    possible.link ??
-                    possible.url ??
-                    possible.code ??
-                    possible.value ??
-                    possible.activation_link;
-
-                return one ? [one] : [];
-            }
-
-            return [];
-        }
-
-        function renderPurchaseSuccess(data) {
-            const resultBox = document.getElementById('resultBox');
-            const links = extractLinks(data);
-
-            const linksHtml = links.length
-                ? links.map((link, index) => `
-                    <div class="link-item">
-                        <div class="link-text" id="purchaseLink${index}">${link}</div>
-                        <button class="copy-btn" type="button" onclick="copyText('${encodeURIComponent(link)}', this)">نسخ</button>
-                    </div>
-                `).join('')
-                : `
-                    <div class="result-text">
-                        تمت العملية بنجاح، لكن لم يظهر رابط واضح في رد السيرفر.
-                    </div>
-                `;
-
-            resultBox.style.display = 'block';
-            resultBox.innerHTML = `
-                <div class="result-success">
-                    <div class="result-header">
-                        <span>✅</span>
-                        تم الشراء بنجاح
-                    </div>
-
-                    <div class="result-text">
-                        تم تحديث الرصيد وبيانات الحساب والتفعيلات تلقائيًا بعد الشراء.
-                    </div>
-
-                    ${linksHtml}
-                </div>
-            `;
-        }
-
-        function renderPurchaseError(message) {
-            const resultBox = document.getElementById('resultBox');
-
-            resultBox.style.display = 'block';
-            resultBox.innerHTML = `
-                <div class="result-error">
-                    <div class="result-header">
-                        <span>❌</span>
-                        فشل الشراء
-                    </div>
-
-                    <div class="result-text">
-                        ${safeText(message, 'حدث خطأ أثناء تنفيذ الشراء')}
-                    </div>
-                </div>
-            `;
-        }
-
-        async function copyText(encodedText, btn) {
-            const text = decodeURIComponent(encodedText);
-
-            try {
-                await navigator.clipboard.writeText(text);
-
-                btn.textContent = 'تم النسخ';
-                btn.classList.add('copied');
-                showToast('تم نسخ الرابط', 'success');
-
-                setTimeout(() => {
-                    btn.textContent = 'نسخ';
-                    btn.classList.remove('copied');
-                }, 1500);
-            } catch {
-                showToast('تعذر النسخ تلقائيًا', 'error');
-            }
-        }
-
-        async function purchaseProduct() {
-            const buyBtn = document.getElementById('buyBtn');
-            const qty = getQty();
-
-            if (!productId) {
-                showToast('جاري تحميل المنتج، حاول مرة أخرى', 'warning');
-                await loadProduct();
-
-                if (!productId) return;
-            }
-
-            if (productStock !== null && Number(productStock) < qty) {
-                showToast('الكمية المطلوبة أكبر من المتاح', 'error');
-                return;
-            }
-
-            try {
-                setButtonLoading(buyBtn, true, 'جاري تنفيذ الشراء...', '<span>🛒</span> اشتري الآن');
-
-                const body = JSON.stringify({
-                    product_id: productId,
-                    productId: productId,
-                    id: productId,
-                    quantity: qty,
-                    qty: qty
-                });
-
-                const res = await apiRequest(PURCHASE_PATH, {
-                    method: 'POST',
-                    body
-                });
-
-                const data = await readJsonResponse(res);
-
-                if (!res.ok || data.success === false || data.status === false) {
-                    throw new Error(data.message || data.error || data.raw || 'فشل تنفيذ عملية الشراء');
-                }
-
-                renderPurchaseSuccess(data);
-                showToast('تم الشراء بنجاح ✅', 'success');
-
-                await hardSyncAfterPurchase();
-            } catch (err) {
-                renderPurchaseError(err.message);
-                showToast(err.message || 'فشل الشراء', 'error');
-
-                await syncAllData({ showAccount: accountBoxVisible, quiet: true });
-            } finally {
-                setButtonLoading(buyBtn, false, '', '<span>🛒</span> اشتري الآن');
-            }
-        }
-
-        async function syncAllData({ showAccount = false, quiet = true } = {}) {
-            if (isSyncing) return;
-
-            isSyncing = true;
-
-            try {
-                await loadProduct();
-                await loadAccount();
-
-                lastSyncAt = new Date();
-                updateSyncNote();
-
-                if (showAccount) {
-                    accountBoxVisible = true;
-                    document.getElementById('balanceResult').style.display = 'block';
-                    document.getElementById('balanceBtn').innerHTML = '<span>🙈</span> إخفاء الرصيد والحساب';
-                }
-            } catch (err) {
-                if (!quiet) {
-                    showToast(err.message || 'تعذر تحديث البيانات', 'error');
-                }
-
-                console.error(err);
-            } finally {
-                isSyncing = false;
-            }
-        }
-
-        async function hardSyncAfterPurchase() {
-            await syncAllData({ showAccount: true, quiet: true });
-
-            setTimeout(() => syncAllData({ showAccount: true, quiet: true }), 800);
-            setTimeout(() => syncAllData({ showAccount: true, quiet: true }), 2500);
-            setTimeout(() => syncAllData({ showAccount: true, quiet: true }), 5000);
-        }
-
-        function startAutoSync() {
-            if (autoSyncTimer) clearInterval(autoSyncTimer);
-
-            autoSyncTimer = setInterval(() => {
-                syncAllData({ showAccount: false, quiet: true });
-            }, 15000);
-        }
-
-        document.addEventListener('visibilitychange', () => {
-            if (!document.hidden) {
-                syncAllData({ showAccount: accountBoxVisible, quiet: true });
-            }
-        });
-
-        window.addEventListener('focus', () => {
-            syncAllData({ showAccount: accountBoxVisible, quiet: true });
-        });
-
-        document.addEventListener('DOMContentLoaded', async () => {
-            const qtyInput = document.getElementById('qtyInput');
-
-            qtyInput.addEventListener('input', () => {
-                qtyInput.value = getQty();
+        throw new Error('تعذر الاتصال بالخادم. تحقق من الاتصال بالإنترنت.');
+    }
+
+    // ── Load product info ─────────────────────────
+    async function loadProduct() {
+        try {
+            const res = await apiRequest('/api/v1/products');
+            const data = await res.json();
+            if (data.ok && data.products && data.products.length) {
+                const p = data.products.find(x => x.product_id === 55) || data.products[0];
+                productId = p.product_id;
+                productPrice = p.price;
+                document.getElementById('priceTag').textContent = `Link / $${p.price.toFixed(2)}`;
                 updateTotalCost();
-            });
+            } else {
+                document.getElementById('priceTag').textContent = 'غير متاح حاليًا';
+            }
+        } catch (e) {
+            document.getElementById('priceTag').textContent = 'تعذر تحميل السعر';
+        }
+    }
 
-            await syncAllData({ showAccount: false, quiet: true });
-            startAutoSync();
-        });
-    </script>
-</body>
+    // ── Fetch & render balance (auto, no button) ─────────────────────────
+    async function fetchBalance() {
+        try {
+            const res = await apiRequest('/api/v1/balance');
+            const data = await res.json();
+            if (data.ok) {
+                const unitPrice = productPrice || data.activate_price || 1;
+                const remainingActivations = Math.floor(data.balance / unitPrice);
+                document.getElementById('userInfo').innerHTML = `
+                    <div class="user-row"><span class="key">👤 المستخدم</span><span class="val">${data.username || data.user_id}</span></div>
+                    <div class="user-row"><span class="key">💰 الرصيد</span><span class="val big">$${data.balance.toFixed(2)}</span></div>
+                    <div class="user-row"><span class="key">🤖 التفعيلات الباقية</span><span class="val big">${remainingActivations}</span></div>
+                    <div class="user-row"><span class="key">🏷️ نوع الحساب</span><span class="val">${data.is_reseller ? 'Pro' : 'Normal'}</span></div>
+                `;
+            } else {
+                document.getElementById('userInfo').innerHTML = `<div class="balance-loading">⚠️ تعذر تحميل بيانات الحساب</div>`;
+            }
+        } catch (e) {
+            document.getElementById('userInfo').innerHTML = `<div class="balance-loading">⚠️ تعذر الاتصال بالخادم</div>`;
+        }
+    }
 
-</html>
+    // ── Quantity controls ─────────────────────────
+    function changeQty(delta) {
+        const input = document.getElementById('qtyInput');
+        let val = parseInt(input.value) || 1;
+        val = Math.min(50, Math.max(1, val + delta));
+        input.value = val;
+        updateTotalCost();
+    }
+
+    function updateTotalCost() {
+        const qty = parseInt(document.getElementById('qtyInput').value) || 1;
+        const total = (productPrice * qty).toFixed(2);
+        document.getElementById('totalCostLabel').textContent = productPrice ? `الإجمالي: $${total}` : '';
+    }
+
+    // ── Purchase ─────────────────────────
+    async function purchaseProduct() {
+        if (!productId) {
+            showToast('المنتج غير متاح حاليًا', 'error');
+            return;
+        }
+        const qty = parseInt(document.getElementById('qtyInput').value) || 1;
+        const buyBtn = document.getElementById('buyBtn');
+        const r
