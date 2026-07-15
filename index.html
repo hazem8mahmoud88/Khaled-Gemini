@@ -1,590 +1,47 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gemini 18 Months — Activation Store</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
-
-<style>
-:root{
-  --bg:#060b14;
-  --card:#0d1626;
-  --card2:#121e33;
-  --border:rgba(99,179,237,.18);
-  --text:#e8f0fe;
-  --muted:#8da0bd;
-  --accent:#4f8ef7;
-  --accent2:#8b5cf6;
-  --green:#22c55e;
-  --red:#ef4444;
-  --yellow:#f59e0b;
-}
-
-*{box-sizing:border-box;margin:0;padding:0}
-
-body{
-  font-family:'Cairo',sans-serif;
-  background:
-    radial-gradient(circle at top left,rgba(79,142,247,.18),transparent 35%),
-    radial-gradient(circle at bottom right,rgba(139,92,246,.16),transparent 35%),
-    var(--bg);
-  color:var(--text);
-  min-height:100vh;
-}
-
-.container{
-  max-width:680px;
-  margin:auto;
-  padding:28px 18px 60px;
-}
-
-.header{
-  text-align:center;
-  margin-bottom:28px;
-}
-
-.logo{
-  width:76px;
-  height:76px;
-  margin:0 auto 14px;
-  border-radius:24px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:34px;
-  background:linear-gradient(135deg,var(--accent),var(--accent2));
-  box-shadow:0 0 35px rgba(79,142,247,.35);
-}
-
-h1{
-  font-size:25px;
-  font-weight:800;
-  line-height:1.5;
-}
-
-.header p{
-  color:var(--muted);
-  margin-top:6px;
-  font-size:14px;
-}
-
-.card{
-  background:rgba(13,22,38,.94);
-  border:1px solid var(--border);
-  border-radius:22px;
-  padding:24px;
-  margin-bottom:22px;
-  box-shadow:0 14px 40px rgba(0,0,0,.35);
-}
-
-.card-title{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  margin-bottom:18px;
-  font-size:19px;
-  font-weight:800;
-}
-
-.icon{
-  width:48px;
-  height:48px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  border-radius:14px;
-  background:linear-gradient(135deg,var(--accent),var(--accent2));
-  font-size:24px;
-}
-
-.info-box{
-  background:var(--card2);
-  border:1px solid var(--border);
-  border-radius:16px;
-  padding:18px;
-}
-
-.row{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:12px;
-  padding:12px 0;
-  border-bottom:1px solid rgba(255,255,255,.07);
-  font-size:15px;
-}
-
-.row:last-child{border-bottom:0}
-
-.key{color:var(--muted)}
-.val{font-weight:800}
-.big{font-size:21px;color:#1de9b6}
-
-.loading{
-  text-align:center;
-  color:var(--muted);
-  padding:22px 8px;
-  font-size:16px;
-}
-
-.product{
-  background:linear-gradient(135deg,rgba(79,142,247,.16),rgba(139,92,246,.16));
-  border:1px solid rgba(79,142,247,.28);
-  border-radius:18px;
-  padding:22px;
-  text-align:center;
-  margin-bottom:22px;
-}
-
-.product h2{
-  font-size:21px;
-  line-height:1.7;
-  margin-bottom:12px;
-}
-
-.badge{
-  display:inline-flex;
-  padding:7px 14px;
-  border-radius:999px;
-  background:rgba(34,197,94,.13);
-  color:var(--green);
-  border:1px solid rgba(34,197,94,.35);
-  font-weight:800;
-}
-
-.qty-row{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:12px;
-  margin-bottom:18px;
-  flex-wrap:wrap;
-}
-
-.qty-control{
-  display:flex;
-  align-items:center;
-  overflow:hidden;
-  border-radius:14px;
-  border:1px solid var(--border);
-  background:var(--card2);
-}
-
-.qty-control button{
-  width:48px;
-  height:44px;
-  border:0;
-  background:transparent;
-  color:white;
-  font-size:25px;
-  cursor:pointer;
-}
-
-.qty-control input{
-  width:70px;
-  height:44px;
-  border:0;
-  outline:0;
-  text-align:center;
-  background:transparent;
-  color:white;
-  font-size:20px;
-  font-weight:800;
-}
-
-.total{
-  color:#1de9b6;
-  font-weight:800;
-}
-
-.btn{
-  width:100%;
-  border:0;
-  border-radius:16px;
-  padding:16px;
-  font-family:inherit;
-  font-size:19px;
-  font-weight:800;
-  color:white;
-  background:linear-gradient(135deg,var(--accent),var(--accent2));
-  cursor:pointer;
-  box-shadow:0 10px 26px rgba(79,142,247,.35);
-}
-
-.btn:disabled{
-  opacity:.55;
-  cursor:not-allowed;
-}
-
-.result{
-  margin-top:20px;
-  display:none;
-}
-
-.success,.error{
-  padding:18px;
-  border-radius:16px;
-  line-height:1.8;
-}
-
-.success{
-  background:rgba(34,197,94,.1);
-  border:1px solid rgba(34,197,94,.35);
-}
-
-.error{
-  background:rgba(239,68,68,.1);
-  border:1px solid rgba(239,68,68,.35);
-}
-
-.link-item{
-  margin-top:12px;
-  background:var(--card2);
-  border:1px solid var(--border);
-  border-radius:12px;
-  padding:12px;
-  direction:ltr;
-  text-align:left;
-  word-break:break-all;
-  color:#7fb2ff;
-  font-family:monospace;
-}
-
-.copy{
-  margin-top:8px;
-  padding:8px 12px;
-  border:0;
-  border-radius:10px;
-  background:rgba(79,142,247,.18);
-  color:#9dc2ff;
-  font-family:inherit;
-  font-weight:800;
-}
-
-.toast{
-  position:fixed;
-  bottom:24px;
-  left:50%;
-  transform:translateX(-50%) translateY(80px);
-  background:var(--card2);
-  border:1px solid var(--border);
-  border-radius:14px;
-  padding:12px 18px;
-  transition:.3s;
-  z-index:9999;
-  font-weight:800;
-}
-
-.toast.show{
-  transform:translateX(-50%) translateY(0);
-}
-
-.footer{
-  text-align:center;
-  color:var(--muted);
-  opacity:.65;
-  margin-top:34px;
-}
-</style>
-</head>
-
-<body>
-
-<div class="toast" id="toast"></div>
-
-<div class="container">
-
-  <div class="header">
-    <div class="logo">✦</div>
-    <h1>اشتراك Gemini Pro من إعداد حازم محمود</h1>
-    <p>Gemini Pro 18 شهر — تفعيل فوري وآمن</p>
-  </div>
-
-  <div class="card">
-    <div class="card-title">
-      <div class="icon">💰</div>
-      معلومات الحساب والرصيد
-    </div>
-
-    <div class="info-box" id="balanceBox">
-      <div class="loading">⏳ جاري تحميل بيانات الحساب...</div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-title">
-      <div class="icon">✨</div>
-      شراء Gemini Pro — 18 شهر
-    </div>
-
-    <div class="product">
-      <h2>Gemini Pro 18 months<br>Activation Link 🤖</h2>
-      <div class="badge" id="priceTag">جاري تحميل السعر...</div>
-    </div>
-
-    <div class="qty-row">
-      <span class="key">الكمية:</span>
-      <div class="qty-control">
-        <button onclick="changeQty(-1)">−</button>
-        <input id="qtyInput" type="number" value="1" min="1" max="50">
-        <button onclick="changeQty(1)">+</button>
-      </div>
-      <span class="total" id="totalCost"></span>
-    </div>
-
-    <button class="btn" id="buyBtn" onclick="purchaseProduct()">🛒 اشتري الآن</button>
-
-    <div class="result" id="resultBox"></div>
-  </div>
-
-  <div class="footer">Powered by Khaled Mahmoud</div>
-
-</div>
-
-<script>
-const API_KEY = 'tools_f03e453bab5ab59ec78811379dc82a25d54b8dc1';
-const BASE_URL = 'https://api.toolsmarket.online';
-
-const PROXIES = [
-  '',
-  'https://corsproxy.io/?',
-  'https://api.codetabs.com/v1/proxy?quest='
-];
-
-let workingProxy = null;
-let productId = 55;
-let productPrice = 0;
-
-function headers(){
-  return {
-    'X-API-Key': API_KEY,
-    'Content-Type': 'application/json'
-  };
-}
-
-async function apiRequest(path, options = {}){
-  const proxies = workingProxy !== null
-    ? [workingProxy, ...PROXIES.filter(p => p !== workingProxy)]
-    : PROXIES;
-
-  let lastError = null;
-
-  for(const proxy of proxies){
-    try{
-      const url = proxy + BASE_URL + path;
-      const res = await fetch(url, {
-        ...options,
-        headers: headers(),
-        cache: 'no-store'
-      });
-
-      workingProxy = proxy;
-      return res;
-    }catch(err){
-      lastError = err;
-    }
-  }
-
-  throw lastError || new Error('Connection failed');
-}
-
-async function loadProduct(){
-  const priceTag = document.getElementById('priceTag');
-
-  try{
-    const res = await apiRequest('/api/v1/products');
-
-    if(!res.ok){
-      throw new Error('HTTP ' + res.status);
-    }
-
-    const data = await res.json();
-
-    if(!data.ok || !Array.isArray(data.products)){
-      throw new Error('Invalid products response');
-    }
-
-    const product = data.products.find(p => Number(p.product_id) === 55) || data.products[0];
-
-    productId = product.product_id;
-    productPrice = Number(product.price || 0);
-
-    priceTag.textContent = `Link / $${productPrice.toFixed(2)}`;
-    updateTotalCost();
-
-  }catch(err){
-    priceTag.textContent = 'تعذر تحميل السعر';
-    showToast('⚠️ فشل تحميل المنتج', 'error');
-  }
-}
-
-async function fetchBalance(){
-  const box = document.getElementById('balanceBox');
-
-  try{
-    const res = await apiRequest('/api/v1/balance');
-
-    if(!res.ok){
-      throw new Error('HTTP ' + res.status);
-    }
-
-    const data = await res.json();
-
-    if(!data.ok){
-      throw new Error('Invalid balance response');
-    }
-
-    const balance = Number(data.balance || 0);
-    const unitPrice = productPrice || Number(data.activate_price || 1);
-    const remaining = unitPrice > 0 ? Math.floor(balance / unitPrice) : 0;
-
-    box.innerHTML = `
-      <div class="row">
-        <span class="key">👤 المستخدم</span>
-        <span class="val">${data.username || data.user_id || 'غير معروف'}</span>
-      </div>
-      <div class="row">
-        <span class="key">💰 الرصيد</span>
-        <span class="val big">$${balance.toFixed(2)}</span>
-      </div>
-      <div class="row">
-        <span class="key">🤖 التفعيلات المتاحة</span>
-        <span class="val big">${remaining}</span>
-      </div>
-      <div class="row">
-        <span class="key">🏷️ نوع الحساب</span>
-        <span class="val">${data.is_reseller ? 'Pro' : 'Normal'}</span>
-      </div>
-    `;
-
-  }catch(err){
-    box.innerHTML = `
-      <div class="loading">
-        ⚠️ تعذر تحميل بيانات الحساب<br>
-        <small>غالبًا المشكلة من CORS أو الخادم لا يسمح بطلبات GitHub Pages.</small>
-      </div>
-    `;
-  }
-}
-
-function changeQty(delta){
-  const input = document.getElementById('qtyInput');
-  let value = parseInt(input.value || '1');
-  value = Math.max(1, Math.min(50, value + delta));
-  input.value = value;
-  updateTotalCost();
-}
-
-function updateTotalCost(){
-  const qty = parseInt(document.getElementById('qtyInput').value || '1');
-  const total = productPrice * qty;
-  document.getElementById('totalCost').textContent =
-    productPrice ? `الإجمالي: $${total.toFixed(2)}` : '';
-}
-
-async function purchaseProduct(){
-  const btn = document.getElementById('buyBtn');
-  const result = document.getElementById('resultBox');
-  const qty = parseInt(document.getElementById('qtyInput').value || '1');
-
-  if(!productId || !productPrice){
-    showToast('المنتج لم يتم تحميله بعد', 'error');
-    return;
-  }
-
-  btn.disabled = true;
-  btn.textContent = '⏳ جاري الشراء...';
-  result.style.display = 'none';
-  result.innerHTML = '';
-
-  try{
-    const res = await apiRequest('/api/v1/order', {
-      method: 'POST',
-      body: JSON.stringify({
-        product_id: productId,
-        quantity: qty
-      })
-    });
-
-    const data = await res.json();
-
-    if(!res.ok || !data.ok){
-      throw new Error(data.message || data.error || 'فشل تنفيذ الشراء');
-    }
-
-    const links = data.links || data.activation_links || data.data || [];
-
-    result.className = 'result';
-    result.style.display = 'block';
-
-    let html = `<div class="success"><b>✅ تم الشراء بنجاح</b><br>`;
-
-    if(Array.isArray(links) && links.length){
-      links.forEach(link => {
-        html += `
-          <div class="link-item">${link}</div>
-          <button class="copy" onclick="copyText('${String(link).replace(/'/g, "\\'")}')">نسخ الرابط</button>
-        `;
-      });
-    }else if(data.link){
-      html += `
-        <div class="link-item">${data.link}</div>
-        <button class="copy" onclick="copyText('${String(data.link).replace(/'/g, "\\'")}')">نسخ الرابط</button>
-      `;
-    }else{
-      html += `<br>تم تنفيذ الطلب، لكن لم يتم العثور على رابط في الرد.`;
-    }
-
-    html += `</div>`;
-    result.innerHTML = html;
-
-    showToast('✅ تم الشراء وتحديث الرصيد', 'success');
-
-    await loadProduct();
-    await fetchBalance();
-
-  }catch(err){
-    result.className = 'result';
-    result.style.display = 'block';
-    result.innerHTML = `
-      <div class="error">
-        <b>❌ فشل الشراء</b><br>
-        ${err.message || 'حدث خطأ غير معروف'}
-      </div>
-    `;
-    showToast('❌ فشل تنفيذ الشراء', 'error');
-  }finally{
-    btn.disabled = false;
-    btn.textContent = '🛒 اشتري الآن';
-  }
-}
-
-function copyText(text){
-  navigator.clipboard.writeText(text);
-  showToast('📋 تم نسخ الرابط', 'success');
-}
-
-function showToast(message){
-  const toast = document.getElementById('toast');
-  toast.textContent = message;
-  toast.classList.add('show');
-  setTimeout(() => toast.classList.remove('show'), 2500);
-}
-
-document.getElementById('qtyInput').addEventListener('input', updateTotalCost);
-
-window.addEventListener('load', async () => {
-  await loadProduct();
-  await fetchBalance();
-
-  setInterval(fetchBalance, 30000);
-});
-</script>
-
-</body>
-</html>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gemini 18 Months — Activation Store</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Cairo:wght@400;600;700;800&display=swap"
+        rel="stylesheet" />
+    <style>
+        :root {
+            --bg: #060b14;
+            --surface: #0d1626;
+            --surface2: #121e33;
+            --border: rgba(99, 179, 237, 0.12);
+            --accent: #4f8ef7;
+            --accent2: #8b5cf6;
+            --gem: #1de9b6;
+            --text: #e8f0fe;
+            --muted: #7a90b0;
+            --success: #22c55e;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --radius: 16px;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Cairo', 'Inter', sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Animated background */
         body::before {
             content: '';
             position: fixed;
@@ -602,8 +59,13 @@ window.addEventListener('load', async () => {
         }
 
         @keyframes bgPulse {
-            0% { transform: scale(1) rotate(0deg); }
-            100% { transform: scale(1.05) rotate(2deg); }
+            0% {
+                transform: scale(1) rotate(0deg);
+            }
+
+            100% {
+                transform: scale(1.05) rotate(2deg);
+            }
         }
 
         .container {
@@ -614,7 +76,11 @@ window.addEventListener('load', async () => {
             padding: 32px 20px 60px;
         }
 
-        .header { text-align: center; margin-bottom: 40px; }
+        /* ─── Header ─── */
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
 
         .logo-ring {
             width: 80px;
@@ -631,8 +97,13 @@ window.addEventListener('load', async () => {
         }
 
         @keyframes logoGlow {
-            0% { box-shadow: 0 0 30px rgba(79, 142, 247, 0.4), 0 0 60px rgba(139, 92, 246, 0.2); }
-            100% { box-shadow: 0 0 50px rgba(79, 142, 247, 0.6), 0 0 100px rgba(29, 233, 182, 0.3); }
+            0% {
+                box-shadow: 0 0 30px rgba(79, 142, 247, 0.4), 0 0 60px rgba(139, 92, 246, 0.2);
+            }
+
+            100% {
+                box-shadow: 0 0 50px rgba(79, 142, 247, 0.6), 0 0 100px rgba(29, 233, 182, 0.3);
+            }
         }
 
         .header h1 {
@@ -645,8 +116,12 @@ window.addEventListener('load', async () => {
             margin-bottom: 8px;
         }
 
-        .header p { color: var(--muted); font-size: 14px; }
+        .header p {
+            color: var(--muted);
+            font-size: 14px;
+        }
 
+        /* ─── Card ─── */
         .card {
             background: var(--surface);
             border: 1px solid var(--border);
@@ -662,14 +137,18 @@ window.addEventListener('load', async () => {
         .card::before {
             content: '';
             position: absolute;
-            top: 0; left: 0; right: 0;
+            top: 0;
+            left: 0;
+            right: 0;
             height: 2px;
             background: linear-gradient(90deg, transparent, var(--accent), var(--accent2), transparent);
             opacity: 0;
             transition: opacity 0.3s;
         }
 
-        .card:hover::before { opacity: 1; }
+        .card:hover::before {
+            opacity: 1;
+        }
 
         .card:hover {
             border-color: rgba(99, 179, 237, 0.25);
@@ -698,7 +177,13 @@ window.addEventListener('load', async () => {
             flex-shrink: 0;
         }
 
-        .balance-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px; }
+        /* ─── Balance Section ─── */
+        .balance-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 16px;
+        }
 
         .stat-box {
             background: var(--surface2);
@@ -708,9 +193,19 @@ window.addEventListener('load', async () => {
             text-align: center;
         }
 
-        .stat-box .val { font-size: 22px; font-weight: 800; color: var(--gem); margin-bottom: 4px; }
-        .stat-box .lbl { font-size: 12px; color: var(--muted); }
+        .stat-box .val {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--gem);
+            margin-bottom: 4px;
+        }
 
+        .stat-box .lbl {
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        /* ─── Product Card ─── */
         .product-banner {
             background: linear-gradient(135deg, rgba(79, 142, 247, 0.15), rgba(139, 92, 246, 0.15));
             border: 1px solid rgba(79, 142, 247, 0.3);
@@ -722,9 +217,23 @@ window.addEventListener('load', async () => {
             gap: 16px;
         }
 
-        .product-icon { font-size: 40px; flex-shrink: 0; }
-        .product-info h3 { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
-        .product-meta { display: flex; flex-wrap: wrap; gap: 10px; }
+        .product-icon {
+            font-size: 40px;
+            flex-shrink: 0;
+        }
+
+        .product-info h3 {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 6px;
+        }
+
+        .product-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
 
         .badge {
             display: inline-flex;
@@ -736,12 +245,37 @@ window.addEventListener('load', async () => {
             font-weight: 600;
         }
 
-        .badge-price { background: rgba(34, 197, 94, 0.15); color: var(--success); border: 1px solid rgba(34, 197, 94, 0.3); }
-        .badge-stock { background: rgba(245, 158, 11, 0.15); color: var(--warning); border: 1px solid rgba(245, 158, 11, 0.3); }
-        .badge-auto { background: rgba(79, 142, 247, 0.15); color: var(--accent); border: 1px solid rgba(79, 142, 247, 0.3); }
+        .badge-price {
+            background: rgba(34, 197, 94, 0.15);
+            color: var(--success);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+        }
 
-        .qty-row { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
-        .qty-label { font-size: 14px; color: var(--muted); white-space: nowrap; }
+        .badge-stock {
+            background: rgba(245, 158, 11, 0.15);
+            color: var(--warning);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+
+        .badge-auto {
+            background: rgba(79, 142, 247, 0.15);
+            color: var(--accent);
+            border: 1px solid rgba(79, 142, 247, 0.3);
+        }
+
+        /* ─── Qty Selector ─── */
+        .qty-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .qty-label {
+            font-size: 14px;
+            color: var(--muted);
+            white-space: nowrap;
+        }
 
         .qty-control {
             display: flex;
@@ -753,7 +287,8 @@ window.addEventListener('load', async () => {
         }
 
         .qty-btn {
-            width: 40px; height: 40px;
+            width: 40px;
+            height: 40px;
             background: transparent;
             border: none;
             color: var(--text);
@@ -765,8 +300,13 @@ window.addEventListener('load', async () => {
             justify-content: center;
         }
 
-        .qty-btn:hover { background: rgba(79, 142, 247, 0.15); }
-        .qty-btn:active { background: rgba(79, 142, 247, 0.3); }
+        .qty-btn:hover {
+            background: rgba(79, 142, 247, 0.15);
+        }
+
+        .qty-btn:active {
+            background: rgba(79, 142, 247, 0.3);
+        }
 
         #qtyInput {
             width: 60px;
@@ -782,8 +322,11 @@ window.addEventListener('load', async () => {
         }
 
         #qtyInput::-webkit-outer-spin-button,
-        #qtyInput::-webkit-inner-spin-button { -webkit-appearance: none; }
+        #qtyInput::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+        }
 
+        /* ─── Buttons ─── */
         .btn {
             width: 100%;
             padding: 14px 24px;
@@ -811,7 +354,9 @@ window.addEventListener('load', async () => {
             transition: opacity 0.2s;
         }
 
-        .btn:active::after { opacity: 0.08; }
+        .btn:active::after {
+            opacity: 0.08;
+        }
 
         .btn-primary {
             background: linear-gradient(135deg, var(--accent), var(--accent2));
@@ -819,7 +364,10 @@ window.addEventListener('load', async () => {
             box-shadow: 0 4px 20px rgba(79, 142, 247, 0.35);
         }
 
-        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(79, 142, 247, 0.5); }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(79, 142, 247, 0.5);
+        }
 
         .btn-secondary {
             background: var(--surface2);
@@ -827,33 +375,82 @@ window.addEventListener('load', async () => {
             border: 1px solid var(--border);
         }
 
-        .btn-secondary:hover { border-color: var(--accent); background: rgba(79, 142, 247, 0.1); }
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            background: rgba(79, 142, 247, 0.1);
+        }
 
-        .btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none !important; }
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none !important;
+        }
 
+        /* ─── Spinner ─── */
         .spinner {
-            width: 18px; height: 18px;
+            width: 18px;
+            height: 18px;
             border: 2px solid rgba(255, 255, 255, 0.3);
             border-top-color: white;
             border-radius: 50%;
             animation: spin 0.7s linear infinite;
         }
 
-        @keyframes spin { to { transform: rotate(360deg); } }
-
-        #resultBox { display: none; margin-top: 20px; animation: fadeInUp 0.4s ease; }
-
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(16px); }
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
         }
 
-        .result-success { background: rgba(34, 197, 94, 0.08); border: 1px solid rgba(34, 197, 94, 0.3); border-radius: 12px; padding: 20px; }
-        .result-error { background: rgba(239, 68, 68, 0.08); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 12px; padding: 20px; }
+        /* ─── Result Box ─── */
+        #resultBox {
+            display: none;
+            margin-top: 20px;
+            animation: fadeInUp 0.4s ease;
+        }
 
-        .result-header { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; font-weight: 700; font-size: 15px; }
-        .result-success .result-header { color: var(--success); }
-        .result-error .result-header { color: var(--danger); }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(16px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .result-success {
+            background: rgba(34, 197, 94, 0.08);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .result-error {
+            background: rgba(239, 68, 68, 0.08);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .result-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 16px;
+            font-weight: 700;
+            font-size: 15px;
+        }
+
+        .result-success .result-header {
+            color: var(--success);
+        }
+
+        .result-error .result-header {
+            color: var(--danger);
+        }
 
         .link-item {
             background: var(--surface2);
@@ -890,13 +487,29 @@ window.addEventListener('load', async () => {
             font-family: inherit;
         }
 
-        .copy-btn:hover { background: rgba(79, 142, 247, 0.3); }
+        .copy-btn:hover {
+            background: rgba(79, 142, 247, 0.3);
+        }
 
-        .copy-btn.copied { background: rgba(34, 197, 94, 0.2); border-color: rgba(34, 197, 94, 0.4); color: var(--success); }
+        .copy-btn.copied {
+            background: rgba(34, 197, 94, 0.2);
+            border-color: rgba(34, 197, 94, 0.4);
+            color: var(--success);
+        }
 
-        #balanceResult { margin-top: 16px; animation: fadeInUp 0.4s ease; }
+        /* ─── Balance info box ─── */
+        #balanceResult {
+            display: none;
+            margin-top: 16px;
+            animation: fadeInUp 0.4s ease;
+        }
 
-        .user-info { background: var(--surface2); border: 1px solid var(--border); border-radius: 12px; padding: 16px; }
+        .user-info {
+            background: var(--surface2);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 16px;
+        }
 
         .user-row {
             display: flex;
@@ -907,18 +520,47 @@ window.addEventListener('load', async () => {
             font-size: 14px;
         }
 
-        .user-row:last-child { border-bottom: none; padding-bottom: 0; }
-        .user-row:first-child { padding-top: 0; }
-        .user-row .key { color: var(--muted); }
-        .user-row .val { font-weight: 600; color: var(--text); }
-        .user-row .val.big { font-size: 20px; font-weight: 800; color: var(--gem); }
+        .user-row:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
 
-        .balance-loading { text-align: center; color: var(--muted); font-size: 14px; padding: 10px 0; }
+        .user-row:first-child {
+            padding-top: 0;
+        }
 
-        .footer { text-align: center; margin-top: 40px; color: var(--muted); font-size: 12px; opacity: 0.6; }
+        .user-row .key {
+            color: var(--muted);
+        }
 
-        .divider { height: 1px; background: var(--border); margin: 20px 0; }
+        .user-row .val {
+            font-weight: 600;
+            color: var(--text);
+        }
 
+        .user-row .val.big {
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--gem);
+        }
+
+        /* ─── Footer ─── */
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            color: var(--muted);
+            font-size: 12px;
+            opacity: 0.6;
+        }
+
+        /* ─── Divider ─── */
+        .divider {
+            height: 1px;
+            background: var(--border);
+            margin: 20px 0;
+        }
+
+        /* ─── Toast ─── */
         #toast {
             position: fixed;
             bottom: 30px;
@@ -936,179 +578,141 @@ window.addEventListener('load', async () => {
             white-space: nowrap;
         }
 
-        #toast.show { transform: translateX(-50%) translateY(0); }
-        #toast.success { color: var(--success); border-color: rgba(34, 197, 94, 0.3); }
-        #toast.error { color: var(--danger); border-color: rgba(239, 68, 68, 0.3); }
+        #toast.show {
+            transform: translateX(-50%) translateY(0);
+        }
 
+        #toast.success {
+            color: var(--success);
+            border-color: rgba(34, 197, 94, 0.3);
+        }
+
+        #toast.error {
+            color: var(--danger);
+            border-color: rgba(239, 68, 68, 0.3);
+        }
+
+        /* ─── Responsive ─── */
         @media (max-width: 480px) {
-            .balance-grid { grid-template-columns: 1fr; }
-            .header h1 { font-size: 22px; }
+            .balance-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header h1 {
+                font-size: 22px;
+            }
         }
     </style>
 </head>
+
 <body>
-<div id="toast"></div>
 
-<div class="container">
+    <div id="toast"></div>
 
-    <!-- Header -->
-    <div class="header">
-        <div class="logo-ring">✦</div>
-        <h1>اشتراك Gemini Pro من اعداد حازم محمود</h1>
-        <p>احصل على Gemini Pro 18 شهر — فوري وآمن</p>
-    </div>
+    <div class="container">
 
-    <!-- Balance Card (auto updates, no manual button) -->
-    <div class="card">
-        <div class="card-title">
-            <div class="icon">💰</div>
-            معلومات الحساب والرصيد
+        <!-- Header -->
+        <div class="header">
+            <div class="logo-ring">✦</div>
+            <h1>اشتراك Gemini Pro من اعداد حازم محمود</h1>
+            <p>احصل على Gemini Pro 18 شهر — فوري وآمن</p>
         </div>
 
-        <div id="balanceResult">
-            <div class="user-info" id="userInfo">
-                <div class="balance-loading">⏳ جاري تحميل بيانات الحساب...</div>
+        <!-- Balance Card -->
+        <div class="card">
+            <div class="card-title">
+                <div class="icon">💰</div>
+                معلومات الحساب والرصيد
+            </div>
+
+            <button class="btn btn-secondary" id="balanceBtn" onclick="fetchBalance()">
+                <span>🔄</span> عرض الرصيد والحساب
+            </button>
+
+            <div id="balanceResult">
+                <div class="divider"></div>
+                <div class="user-info" id="userInfo"></div>
             </div>
         </div>
-    </div>
 
-    <!-- Purchase Card -->
-    <div class="card">
-        <div class="card-title">
-            <div class="icon">✦</div>
-            شراء Gemini Pro — 18 شهر
-        </div>
+        <!-- Purchase Card -->
+        <div class="card">
+            <div class="card-title">
+                <div class="icon">✦</div>
+                شراء Gemini Pro — 18 شهر
+            </div>
 
-        <!-- Product Banner -->
-        <div class="product-banner">
-            <div class="product-icon">🤖</div>
-            <div class="product-info">
-                <h3>Gemini Pro 18 months Activation Link</h3>
-                <div class="product-meta">
-                    <span class="badge badge-price" id="priceTag">جاري التحميل...</span>
+            <!-- Product Banner -->
+            <div class="product-banner">
+                <div class="product-icon">🤖</div>
+                <div class="product-info">
+                    <h3>Gemini Pro 18 months Activation Link</h3>
+                    <div class="product-meta">
+                        <span class="badge badge-price" id="priceTag">جاري التحميل...</span>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Quantity -->
-        <div class="qty-row">
-            <span class="qty-label">الكمية:</span>
-            <div class="qty-control">
-                <button class="qty-btn" onclick="changeQty(-1)">−</button>
-                <input type="number" id="qtyInput" value="1" min="1" max="50" />
-                <button class="qty-btn" onclick="changeQty(1)">+</button>
+            <!-- Quantity -->
+            <div class="qty-row">
+                <span class="qty-label">الكمية:</span>
+                <div class="qty-control">
+                    <button class="qty-btn" onclick="changeQty(-1)">−</button>
+                    <input type="number" id="qtyInput" value="1" min="1" max="50" />
+                    <button class="qty-btn" onclick="changeQty(1)">+</button>
+                </div>
+                <span class="qty-label" id="totalCostLabel"
+                    style="color:var(--gem); font-weight:700; font-size:16px;"></span>
             </div>
-            <span class="qty-label" id="totalCostLabel" style="color:var(--gem); font-weight:700; font-size:16px;"></span>
+
+            <!-- Buy Button -->
+            <button class="btn btn-primary" id="buyBtn" onclick="purchaseProduct()">
+                <span>🛒</span> اشتري الآن
+            </button>
+
+            <!-- Result -->
+            <div id="resultBox"></div>
         </div>
 
-        <!-- Buy Button -->
-        <button class="btn btn-primary" id="buyBtn" onclick="purchaseProduct()">
-            <span>🛒</span> اشتري الآن
-        </button>
-
-        <!-- Result -->
-        <div id="resultBox"></div>
+        <div class="footer">
+            <p>Powered by Khaled Mahmoud</p>
+        </div>
     </div>
 
-    <div class="footer">
-        <p>Powered by Khaled Mahmoud</p>
-    </div>
-</div>
+    <script>
+        const API_KEY = 'tools_f03e453bab5ab59ec78811379dc82a25d54b8dc1';
+        const REAL_URL = 'https://api.toolsmarket.online';
+        const PROXIES = [
+            '',                                        // Direct (API might support CORS)
+            'https://corsproxy.io/?',
+            'https://api.codetabs.com/v1/proxy?quest=',
+        ];
+        const HEADERS = { 'X-API-Key': API_KEY, 'Content-Type': 'application/json' };
 
-<script>
-    const API_KEY = 'tools_f03e453bab5ab59ec78811379dc82a25d54b8dc1';
-    const REAL_URL = 'https://api.toolsmarket.online';
-    const PROXIES = [
-        '',
-        'https://corsproxy.io/?',
-        'https://api.codetabs.com/v1/proxy?quest=',
-    ];
-    const HEADERS = { 'X-API-Key': API_KEY, 'Content-Type': 'application/json' };
+        let productId = null;
+        let productPrice = 0;
+        let workingProxy = null; // cache the proxy that worked
 
-    let productId = null;
-    let productPrice = 0;
-    let workingProxy = null;
+        // Smart fetch: tries proxies in order until one works
+        async function apiRequest(path, options = {}) {
+            const list = workingProxy !== null
+                ? [workingProxy, ...PROXIES.filter(p => p !== workingProxy)]
+                : PROXIES;
 
-    async function apiRequest(path, options = {}) {
-        const list = workingProxy !== null
-            ? [workingProxy, ...PROXIES.filter(p => p !== workingProxy)]
-            : PROXIES;
+            for (const proxy of list) {
+                try {
+                    const url = proxy + REAL_URL + path;
+                    const res = await fetch(url, { ...options, headers: HEADERS });
+                    workingProxy = proxy; // remember what worked
+                    return res;
+                } catch (e) {
+                    // try next proxy
+                }
+            }
+            throw new Error('تعذر الاتصال بالخادم. تحقق من الاتصال بالإنترنت.');
+        }
 
-        for (const proxy of list) {
+        // ── Load product info on startup ─────────────────────────
+        async function loadProduct() {
             try {
-                const url = proxy + REAL_URL + path;
-                const res = await fetch(url, { ...options, headers: HEADERS });
-                workingProxy = proxy;
-                return res;
-            } catch (e) {
-                // try next proxy
-            }
-        }
-        throw new Error('تعذر الاتصال بالخادم. تحقق من الاتصال بالإنترنت.');
-    }
-
-    // ── Load product info ─────────────────────────
-    async function loadProduct() {
-        try {
-            const res = await apiRequest('/api/v1/products');
-            const data = await res.json();
-            if (data.ok && data.products && data.products.length) {
-                const p = data.products.find(x => x.product_id === 55) || data.products[0];
-                productId = p.product_id;
-                productPrice = p.price;
-                document.getElementById('priceTag').textContent = `Link / $${p.price.toFixed(2)}`;
-                updateTotalCost();
-            } else {
-                document.getElementById('priceTag').textContent = 'غير متاح حاليًا';
-            }
-        } catch (e) {
-            document.getElementById('priceTag').textContent = 'تعذر تحميل السعر';
-        }
-    }
-
-    // ── Fetch & render balance (auto, no button) ─────────────────────────
-    async function fetchBalance() {
-        try {
-            const res = await apiRequest('/api/v1/balance');
-            const data = await res.json();
-            if (data.ok) {
-                const unitPrice = productPrice || data.activate_price || 1;
-                const remainingActivations = Math.floor(data.balance / unitPrice);
-                document.getElementById('userInfo').innerHTML = `
-                    <div class="user-row"><span class="key">👤 المستخدم</span><span class="val">${data.username || data.user_id}</span></div>
-                    <div class="user-row"><span class="key">💰 الرصيد</span><span class="val big">$${data.balance.toFixed(2)}</span></div>
-                    <div class="user-row"><span class="key">🤖 التفعيلات الباقية</span><span class="val big">${remainingActivations}</span></div>
-                    <div class="user-row"><span class="key">🏷️ نوع الحساب</span><span class="val">${data.is_reseller ? 'Pro' : 'Normal'}</span></div>
-                `;
-            } else {
-                document.getElementById('userInfo').innerHTML = `<div class="balance-loading">⚠️ تعذر تحميل بيانات الحساب</div>`;
-            }
-        } catch (e) {
-            document.getElementById('userInfo').innerHTML = `<div class="balance-loading">⚠️ تعذر الاتصال بالخادم</div>`;
-        }
-    }
-
-    // ── Quantity controls ─────────────────────────
-    function changeQty(delta) {
-        const input = document.getElementById('qtyInput');
-        let val = parseInt(input.value) || 1;
-        val = Math.min(50, Math.max(1, val + delta));
-        input.value = val;
-        updateTotalCost();
-    }
-
-    function updateTotalCost() {
-        const qty = parseInt(document.getElementById('qtyInput').value) || 1;
-        const total = (productPrice * qty).toFixed(2);
-        document.getElementById('totalCostLabel').textContent = productPrice ? `الإجمالي: $${total}` : '';
-    }
-
-    // ── Purchase ─────────────────────────
-    async function purchaseProduct() {
-        if (!productId) {
-            showToast('المنتج غير متاح حاليًا', 'error');
-            return;
-        }
-        const qty = parseInt(document.getElementById('qtyInput').value) || 1;
-        const buyBtn = document.getElementById('buyBtn');
-        const r
+                const res = await apiRequest('/api/v1/products');
