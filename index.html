@@ -1,40 +1,590 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Gemini 18 Months — Activation Store</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Cairo:wght@400;600;700;800&display=swap"
-        rel="stylesheet" />
-    <style>
-        :root {
-            --bg: #060b14;
-            --surface: #0d1626;
-            --surface2: #121e33;
-            --border: rgba(99, 179, 237, 0.12);
-            --accent: #4f8ef7;
-            --accent2: #8b5cf6;
-            --gem: #1de9b6;
-            --text: #e8f0fe;
-            --muted: #7a90b0;
-            --success: #22c55e;
-            --danger: #ef4444;
-            --warning: #f59e0b;
-            --radius: 16px;
-            --shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
-        }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gemini 18 Months — Activation Store</title>
 
-        body {
-            background: var(--bg);
-            color: var(--text);
-            font-family: 'Cairo', 'Inter', sans-serif;
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
 
+<style>
+:root{
+  --bg:#060b14;
+  --card:#0d1626;
+  --card2:#121e33;
+  --border:rgba(99,179,237,.18);
+  --text:#e8f0fe;
+  --muted:#8da0bd;
+  --accent:#4f8ef7;
+  --accent2:#8b5cf6;
+  --green:#22c55e;
+  --red:#ef4444;
+  --yellow:#f59e0b;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+  font-family:'Cairo',sans-serif;
+  background:
+    radial-gradient(circle at top left,rgba(79,142,247,.18),transparent 35%),
+    radial-gradient(circle at bottom right,rgba(139,92,246,.16),transparent 35%),
+    var(--bg);
+  color:var(--text);
+  min-height:100vh;
+}
+
+.container{
+  max-width:680px;
+  margin:auto;
+  padding:28px 18px 60px;
+}
+
+.header{
+  text-align:center;
+  margin-bottom:28px;
+}
+
+.logo{
+  width:76px;
+  height:76px;
+  margin:0 auto 14px;
+  border-radius:24px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:34px;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  box-shadow:0 0 35px rgba(79,142,247,.35);
+}
+
+h1{
+  font-size:25px;
+  font-weight:800;
+  line-height:1.5;
+}
+
+.header p{
+  color:var(--muted);
+  margin-top:6px;
+  font-size:14px;
+}
+
+.card{
+  background:rgba(13,22,38,.94);
+  border:1px solid var(--border);
+  border-radius:22px;
+  padding:24px;
+  margin-bottom:22px;
+  box-shadow:0 14px 40px rgba(0,0,0,.35);
+}
+
+.card-title{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom:18px;
+  font-size:19px;
+  font-weight:800;
+}
+
+.icon{
+  width:48px;
+  height:48px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:14px;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  font-size:24px;
+}
+
+.info-box{
+  background:var(--card2);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:18px;
+}
+
+.row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:12px 0;
+  border-bottom:1px solid rgba(255,255,255,.07);
+  font-size:15px;
+}
+
+.row:last-child{border-bottom:0}
+
+.key{color:var(--muted)}
+.val{font-weight:800}
+.big{font-size:21px;color:#1de9b6}
+
+.loading{
+  text-align:center;
+  color:var(--muted);
+  padding:22px 8px;
+  font-size:16px;
+}
+
+.product{
+  background:linear-gradient(135deg,rgba(79,142,247,.16),rgba(139,92,246,.16));
+  border:1px solid rgba(79,142,247,.28);
+  border-radius:18px;
+  padding:22px;
+  text-align:center;
+  margin-bottom:22px;
+}
+
+.product h2{
+  font-size:21px;
+  line-height:1.7;
+  margin-bottom:12px;
+}
+
+.badge{
+  display:inline-flex;
+  padding:7px 14px;
+  border-radius:999px;
+  background:rgba(34,197,94,.13);
+  color:var(--green);
+  border:1px solid rgba(34,197,94,.35);
+  font-weight:800;
+}
+
+.qty-row{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  margin-bottom:18px;
+  flex-wrap:wrap;
+}
+
+.qty-control{
+  display:flex;
+  align-items:center;
+  overflow:hidden;
+  border-radius:14px;
+  border:1px solid var(--border);
+  background:var(--card2);
+}
+
+.qty-control button{
+  width:48px;
+  height:44px;
+  border:0;
+  background:transparent;
+  color:white;
+  font-size:25px;
+  cursor:pointer;
+}
+
+.qty-control input{
+  width:70px;
+  height:44px;
+  border:0;
+  outline:0;
+  text-align:center;
+  background:transparent;
+  color:white;
+  font-size:20px;
+  font-weight:800;
+}
+
+.total{
+  color:#1de9b6;
+  font-weight:800;
+}
+
+.btn{
+  width:100%;
+  border:0;
+  border-radius:16px;
+  padding:16px;
+  font-family:inherit;
+  font-size:19px;
+  font-weight:800;
+  color:white;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  cursor:pointer;
+  box-shadow:0 10px 26px rgba(79,142,247,.35);
+}
+
+.btn:disabled{
+  opacity:.55;
+  cursor:not-allowed;
+}
+
+.result{
+  margin-top:20px;
+  display:none;
+}
+
+.success,.error{
+  padding:18px;
+  border-radius:16px;
+  line-height:1.8;
+}
+
+.success{
+  background:rgba(34,197,94,.1);
+  border:1px solid rgba(34,197,94,.35);
+}
+
+.error{
+  background:rgba(239,68,68,.1);
+  border:1px solid rgba(239,68,68,.35);
+}
+
+.link-item{
+  margin-top:12px;
+  background:var(--card2);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:12px;
+  direction:ltr;
+  text-align:left;
+  word-break:break-all;
+  color:#7fb2ff;
+  font-family:monospace;
+}
+
+.copy{
+  margin-top:8px;
+  padding:8px 12px;
+  border:0;
+  border-radius:10px;
+  background:rgba(79,142,247,.18);
+  color:#9dc2ff;
+  font-family:inherit;
+  font-weight:800;
+}
+
+.toast{
+  position:fixed;
+  bottom:24px;
+  left:50%;
+  transform:translateX(-50%) translateY(80px);
+  background:var(--card2);
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:12px 18px;
+  transition:.3s;
+  z-index:9999;
+  font-weight:800;
+}
+
+.toast.show{
+  transform:translateX(-50%) translateY(0);
+}
+
+.footer{
+  text-align:center;
+  color:var(--muted);
+  opacity:.65;
+  margin-top:34px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="toast" id="toast"></div>
+
+<div class="container">
+
+  <div class="header">
+    <div class="logo">✦</div>
+    <h1>اشتراك Gemini Pro من إعداد حازم محمود</h1>
+    <p>Gemini Pro 18 شهر — تفعيل فوري وآمن</p>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="icon">💰</div>
+      معلومات الحساب والرصيد
+    </div>
+
+    <div class="info-box" id="balanceBox">
+      <div class="loading">⏳ جاري تحميل بيانات الحساب...</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="icon">✨</div>
+      شراء Gemini Pro — 18 شهر
+    </div>
+
+    <div class="product">
+      <h2>Gemini Pro 18 months<br>Activation Link 🤖</h2>
+      <div class="badge" id="priceTag">جاري تحميل السعر...</div>
+    </div>
+
+    <div class="qty-row">
+      <span class="key">الكمية:</span>
+      <div class="qty-control">
+        <button onclick="changeQty(-1)">−</button>
+        <input id="qtyInput" type="number" value="1" min="1" max="50">
+        <button onclick="changeQty(1)">+</button>
+      </div>
+      <span class="total" id="totalCost"></span>
+    </div>
+
+    <button class="btn" id="buyBtn" onclick="purchaseProduct()">🛒 اشتري الآن</button>
+
+    <div class="result" id="resultBox"></div>
+  </div>
+
+  <div class="footer">Powered by Khaled Mahmoud</div>
+
+</div>
+
+<script>
+const API_KEY = 'tools_f03e453bab5ab59ec78811379dc82a25d54b8dc1';
+const BASE_URL = 'https://api.toolsmarket.online';
+
+const PROXIES = [
+  '',
+  'https://corsproxy.io/?',
+  'https://api.codetabs.com/v1/proxy?quest='
+];
+
+let workingProxy = null;
+let productId = 55;
+let productPrice = 0;
+
+function headers(){
+  return {
+    'X-API-Key': API_KEY,
+    'Content-Type': 'application/json'
+  };
+}
+
+async function apiRequest(path, options = {}){
+  const proxies = workingProxy !== null
+    ? [workingProxy, ...PROXIES.filter(p => p !== workingProxy)]
+    : PROXIES;
+
+  let lastError = null;
+
+  for(const proxy of proxies){
+    try{
+      const url = proxy + BASE_URL + path;
+      const res = await fetch(url, {
+        ...options,
+        headers: headers(),
+        cache: 'no-store'
+      });
+
+      workingProxy = proxy;
+      return res;
+    }catch(err){
+      lastError = err;
+    }
+  }
+
+  throw lastError || new Error('Connection failed');
+}
+
+async function loadProduct(){
+  const priceTag = document.getElementById('priceTag');
+
+  try{
+    const res = await apiRequest('/api/v1/products');
+
+    if(!res.ok){
+      throw new Error('HTTP ' + res.status);
+    }
+
+    const data = await res.json();
+
+    if(!data.ok || !Array.isArray(data.products)){
+      throw new Error('Invalid products response');
+    }
+
+    const product = data.products.find(p => Number(p.product_id) === 55) || data.products[0];
+
+    productId = product.product_id;
+    productPrice = Number(product.price || 0);
+
+    priceTag.textContent = `Link / $${productPrice.toFixed(2)}`;
+    updateTotalCost();
+
+  }catch(err){
+    priceTag.textContent = 'تعذر تحميل السعر';
+    showToast('⚠️ فشل تحميل المنتج', 'error');
+  }
+}
+
+async function fetchBalance(){
+  const box = document.getElementById('balanceBox');
+
+  try{
+    const res = await apiRequest('/api/v1/balance');
+
+    if(!res.ok){
+      throw new Error('HTTP ' + res.status);
+    }
+
+    const data = await res.json();
+
+    if(!data.ok){
+      throw new Error('Invalid balance response');
+    }
+
+    const balance = Number(data.balance || 0);
+    const unitPrice = productPrice || Number(data.activate_price || 1);
+    const remaining = unitPrice > 0 ? Math.floor(balance / unitPrice) : 0;
+
+    box.innerHTML = `
+      <div class="row">
+        <span class="key">👤 المستخدم</span>
+        <span class="val">${data.username || data.user_id || 'غير معروف'}</span>
+      </div>
+      <div class="row">
+        <span class="key">💰 الرصيد</span>
+        <span class="val big">$${balance.toFixed(2)}</span>
+      </div>
+      <div class="row">
+        <span class="key">🤖 التفعيلات المتاحة</span>
+        <span class="val big">${remaining}</span>
+      </div>
+      <div class="row">
+        <span class="key">🏷️ نوع الحساب</span>
+        <span class="val">${data.is_reseller ? 'Pro' : 'Normal'}</span>
+      </div>
+    `;
+
+  }catch(err){
+    box.innerHTML = `
+      <div class="loading">
+        ⚠️ تعذر تحميل بيانات الحساب<br>
+        <small>غالبًا المشكلة من CORS أو الخادم لا يسمح بطلبات GitHub Pages.</small>
+      </div>
+    `;
+  }
+}
+
+function changeQty(delta){
+  const input = document.getElementById('qtyInput');
+  let value = parseInt(input.value || '1');
+  value = Math.max(1, Math.min(50, value + delta));
+  input.value = value;
+  updateTotalCost();
+}
+
+function updateTotalCost(){
+  const qty = parseInt(document.getElementById('qtyInput').value || '1');
+  const total = productPrice * qty;
+  document.getElementById('totalCost').textContent =
+    productPrice ? `الإجمالي: $${total.toFixed(2)}` : '';
+}
+
+async function purchaseProduct(){
+  const btn = document.getElementById('buyBtn');
+  const result = document.getElementById('resultBox');
+  const qty = parseInt(document.getElementById('qtyInput').value || '1');
+
+  if(!productId || !productPrice){
+    showToast('المنتج لم يتم تحميله بعد', 'error');
+    return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = '⏳ جاري الشراء...';
+  result.style.display = 'none';
+  result.innerHTML = '';
+
+  try{
+    const res = await apiRequest('/api/v1/order', {
+      method: 'POST',
+      body: JSON.stringify({
+        product_id: productId,
+        quantity: qty
+      })
+    });
+
+    const data = await res.json();
+
+    if(!res.ok || !data.ok){
+      throw new Error(data.message || data.error || 'فشل تنفيذ الشراء');
+    }
+
+    const links = data.links || data.activation_links || data.data || [];
+
+    result.className = 'result';
+    result.style.display = 'block';
+
+    let html = `<div class="success"><b>✅ تم الشراء بنجاح</b><br>`;
+
+    if(Array.isArray(links) && links.length){
+      links.forEach(link => {
+        html += `
+          <div class="link-item">${link}</div>
+          <button class="copy" onclick="copyText('${String(link).replace(/'/g, "\\'")}')">نسخ الرابط</button>
+        `;
+      });
+    }else if(data.link){
+      html += `
+        <div class="link-item">${data.link}</div>
+        <button class="copy" onclick="copyText('${String(data.link).replace(/'/g, "\\'")}')">نسخ الرابط</button>
+      `;
+    }else{
+      html += `<br>تم تنفيذ الطلب، لكن لم يتم العثور على رابط في الرد.`;
+    }
+
+    html += `</div>`;
+    result.innerHTML = html;
+
+    showToast('✅ تم الشراء وتحديث الرصيد', 'success');
+
+    await loadProduct();
+    await fetchBalance();
+
+  }catch(err){
+    result.className = 'result';
+    result.style.display = 'block';
+    result.innerHTML = `
+      <div class="error">
+        <b>❌ فشل الشراء</b><br>
+        ${err.message || 'حدث خطأ غير معروف'}
+      </div>
+    `;
+    showToast('❌ فشل تنفيذ الشراء', 'error');
+  }finally{
+    btn.disabled = false;
+    btn.textContent = '🛒 اشتري الآن';
+  }
+}
+
+function copyText(text){
+  navigator.clipboard.writeText(text);
+  showToast('📋 تم نسخ الرابط', 'success');
+}
+
+function showToast(message){
+  const toast = document.getElementById('toast');
+  toast.textContent = message;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 2500);
+}
+
+document.getElementById('qtyInput').addEventListener('input', updateTotalCost);
+
+window.addEventListener('load', async () => {
+  await loadProduct();
+  await fetchBalance();
+
+  setInterval(fetchBalance, 30000);
+});
+</script>
+
+</body>
+</html>
         body::before {
             content: '';
             position: fixed;
